@@ -1,0 +1,45 @@
+{% load custom_filters %}
+
+<!DOCTYPE html>
+<!--   
+    <html lang="en"><head><meta charset="utf-8"/><link rel="icon" href="/favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/><meta name="description" content="Web site created using create-react-app"/><link rel="apple-touch-icon" href="/static/images/logo192.png"/><link rel="manifest" href="/manifest.json"/><title>React App</title><script defer="defer" src="/static/js/main.d06733ef.js"></script><link href="/static/css/main.f855e6bc.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div></body></html>
+   -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Search Page</title>
+    <link rel="stylesheet" href="..\static\css\homepage.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Database Values</h1>
+
+      <table border="1" class="dataList">
+        <thead>
+          <tr>
+            {% for key in data_list_keys %}
+              <th>{{ key }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        {% for item in data_list %}
+          <tbody>
+            <tr>
+              {% for key in data_list_keys %}
+                <td>{{ item|get_item:key }}</td>
+              {% endfor %}
+            </tr>
+          </tbody>
+        {% endfor %}
+      </table>
+
+      <form method="post" action="{% url 'index' %}">
+        {% csrf_token %}
+        <input type="text" name="search_input" />
+        <button type="submit">Search</button>
+      </form>
+    </div>
+    <script type="module" src="../static/js/homepage.js"></script>
+  </body>
+</html>
