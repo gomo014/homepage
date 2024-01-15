@@ -8,13 +8,17 @@
   <head>
     <meta charset="UTF-8" />
     <title>Search Page</title>
-    <link rel="stylesheet" href="..\static\css\homepage.css" />
   </head>
 
   <body>
     <div class="container">
       <h1>Database Values</h1>
-
+      <form method="post" action="{% url 'index' %}">
+        {% csrf_token %}
+        <input type="text" name="search_input" />
+        <button type="submit">Search</button>
+      </form>
+      
       <table border="1" class="dataList">
         <thead>
           <tr>
@@ -34,12 +38,8 @@
         {% endfor %}
       </table>
 
-      <form method="post" action="{% url 'index' %}">
-        {% csrf_token %}
-        <input type="text" name="search_input" />
-        <button type="submit">Search</button>
-      </form>
+
     </div>
-    <script type="module" src="../static/js/homepage.js"></script>
+    <script src="../static/index.js"></script>
   </body>
 </html>
