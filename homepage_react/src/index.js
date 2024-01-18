@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../css/homepage.css';
+import './css/homepage.css';
 
 const SearchForm = ({ fetchData }) => {
   const [searchTerm, setSearchTerm] = useState('');
