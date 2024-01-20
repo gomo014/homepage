@@ -11,7 +11,6 @@ const SearchForm = ({ fetchData }) => {
     // 以下は例としてコンソールに入力された値を表示するだけのものです
     console.log(searchTerm);
   };
-
   return (
     <form onSubmit={handleSearch}>
       <input

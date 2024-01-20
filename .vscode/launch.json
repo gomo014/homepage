@@ -13,14 +13,15 @@
             "justMyCode": true
         },
         {
-            "name": "npm run build",
-            "type": "node",
+            "name": "Python Django 実家",
+            "type": "python",
             "request": "launch",
-            "args": ["run", "build"],
-            "presentation": {
-                "reveal": "always",
-                "panel": "new"
-            }
+            "program": "C:\\Users\\morik\\Desktop\\プログラミング\\homepage\\manage.py",
+            "args": [
+                "runserver"
+            ],
+            "django": true,
+            "justMyCode": true
         }
     ]
 }
