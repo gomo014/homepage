@@ -2,26 +2,24 @@
 ２　ローカルサーバー作成　→クリア
 　　（あとでコード解析）ファイルの依存関係、処理の流れを調べる
 ３　DB作成、設定、データ投入　→クリア
-
-【現在】ReactのビルドとDjangoプロジェクトへの統合試行中
-
-自動ビルドのためにnpm run buildと設定ファイルのオプションでwatch:trueにした
-VSCODEでnpm run buildを実行する方法を試行中（Djangoとは別でできるようにする）
-
-
-
-検索フォームから検索データを出力するサイトを作成中
-
-TODO:サイトのデザイン
-
-４　pythonファイル作成含め、ローカル上でサイトが動作するようにする
+４　pythonファイル作成含め、ローカル上でサイトが動作するようにする  →クリア
 　　→表作成し、データ反映　クリア
 　　→検索クエリ入力から表示までできるようにする
-４　ワイヤーフレーム作成
-５　レンタルサーバー上で自分のホームページが動作するようにする
-６　ホームページを作成する
+４　ワイヤーフレーム作成　→作業中
+
+５　ホームページを作成する
+６　レンタルサーバー上で自分のホームページが動作するようにする
 
 
+ホームページ　アイデア：
+昔風のデザインでCGをつかう
+動的な動作は新しめで
+
+狙い：昔風という意外性のおもしろさ、見やすさ、動いた時の意外性
+
+ボタンを押したときに動きつける
+
+参考サイト：https://y-ta.net/90homepage/#
 
 
 検索画面アイデア
@@ -29,8 +27,47 @@ TODO:サイトのデザイン
 データリスト取得処理：画面読み込み時→すべて、検索クエリ時（非同期処理）→条件にあったもの
 表：データリストから表示する
 
+作品アイデア：
+今まで書いてきたメモを辞書的に検索できるサイト
 
 
 TODO:
 仮想コンテナを使用した開発
 CDCI（Github Actionsでなにをやっているかもう少し調べる）
+
+
+学習メモ：
+
+☆POSTからのpyファイルへの受け渡しについて
+      <form action="{% url 'search' %}" method="post">
+でurls.pyに渡す
+
+urls.pyにて
+urlpatterns = [
+    path('', views.index, name='index'),
+    path('search/', views.search, name='search')
+]
+
+でview(.py).searchに渡す
+
+☆自動ビルドについて
+１. package.jsonにてwebpack.configファイルを指定
+例：
+
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "webpack --config webpack_config/webpack.config.js",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+
+2. webpack.configファイルを作成
+
+・module.exports = {
+	watch = 'true'
+}
+にする
+
+3. git bashなどで、Reactのプロジェクトフォルダのディレクトリで下記実行
+npm run build
+これでsrcフォルダにあるindex.jsファイルが保存されるたびに自動ビルドされる
