@@ -5,9 +5,14 @@
 ４　pythonファイル作成含め、ローカル上でサイトが動作するようにする  →クリア
 　　→表作成し、データ反映　クリア
 　　→検索クエリ入力から表示までできるようにする
-４　ワイヤーフレーム作成　→作業中
+４　ワイヤーフレーム作成　→取消し
+５　ホームページを作成する　→作業中
+    ・画像ファイルの指定方法、JSXを学習。次はHTMLの実装
 
-５　ホームページを作成する
+    0130
+
+
+
 ６　レンタルサーバー上で自分のホームページが動作するようにする
 
 
@@ -34,40 +39,3 @@
 TODO:
 仮想コンテナを使用した開発
 CDCI（Github Actionsでなにをやっているかもう少し調べる）
-
-
-学習メモ：
-
-☆POSTからのpyファイルへの受け渡しについて
-      <form action="{% url 'search' %}" method="post">
-でurls.pyに渡す
-
-urls.pyにて
-urlpatterns = [
-    path('', views.index, name='index'),
-    path('search/', views.search, name='search')
-]
-
-でview(.py).searchに渡す
-
-☆自動ビルドについて
-１. package.jsonにてwebpack.configファイルを指定
-例：
-
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "webpack --config webpack_config/webpack.config.js",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-
-2. webpack.configファイルを作成
-
-・module.exports = {
-	watch = 'true'
-}
-にする
-
-3. git bashなどで、Reactのプロジェクトフォルダのディレクトリで下記実行
-npm run build
-これでsrcフォルダにあるindex.jsファイルが保存されるたびに自動ビルドされる

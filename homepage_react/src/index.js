@@ -1,26 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './css/homepage.css';
+import { createRoot } from 'react-dom/client';
+import App from './App.jsx';
+import bgImage from '../public/images/background.jpg';
 
-const SearchForm = ({ fetchData }) => {
-  const [searchTerm, setSearchTerm] = useState('');
+document.body.style.backgroundImage = `url(${bgImage})`;
 
-  const handleSearch = async (event) => {
-    event.preventDefault();
-    
-    // サーバーにリクエストを送るなどの処理を行う場合、ここで実装します
-    // 以下は例としてコンソールに入力された値を表示するだけのものです
-    console.log(searchTerm);
-  };
-  return (
-    <form onSubmit={handleSearch}>
-      <input
-        type="text"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
-      <button type="submit">Search</button>
-    </form>
-  );
-};
-
-export default SearchForm;
+createRoot(document.getElementById('root')).render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+);
