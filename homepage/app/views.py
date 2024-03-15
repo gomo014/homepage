@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from .models import Product
 from django.http import HttpResponse
+from rest_framework import generics
+from .models import Product
+from .serializers import ProductSerializer
 
 def index(request):
     # データベースから全てのレコードを取得
@@ -32,3 +35,7 @@ def process_data_list(queryset):
         data_list_keys = data_list[0].keys
 
     return data_list, data_list_keys
+
+class ProductList(generics.ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer

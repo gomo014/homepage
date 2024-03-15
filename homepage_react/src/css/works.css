@@ -1,0 +1,159 @@
+.search-result {
+    position:relative;
+    margin-top: 20px;
+    width:80%;
+    left:100px;
+}
+
+.result-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-bottom: 1px solid hwb(0 73% 27%);
+    border-radius: 5px;
+}
+
+.result-table th {
+    border: 1px solid hwb(0 73% 27%);
+    padding: 8px;
+}
+
+.result-table td {
+    border-left: 1px solid hwb(0 73% 27%);
+    border-right: 1px solid hwb(0 73% 27%);
+    padding: 8px;
+}
+
+.result-table th {
+    background-color: #dddddd;
+    text-align: center;
+}
+
+.result-table th:hover {
+    filter: brightness(85%);
+    cursor: pointer;
+}
+
+.result-table th.urlKey {
+    filter: brightness(100%);
+    cursor: default;
+}
+
+.result-row:nth-child(even) {
+    background-color: hwb(0 95% 5%);
+}
+
+.result-row:nth-child(odd) {
+    background-color: white;
+}
+
+.result-row:hover {
+    background-color: rgb(204, 233, 255);
+}
+
+.result-table th > .key {
+    position: relative;
+}
+
+.sortWindowType {
+    position: absolute;
+    z-index: 1;
+    top: 8.5%;
+    right: 83.5%;
+    width: 14%;
+    height: 92px;
+    padding: 8px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-align: left;
+}
+
+.sortWindowType label {
+    text-align: left;
+}
+.filterbutton {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    right: 43%;
+    top: -10px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.gridbutton {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    right: -42%;
+    top: -10px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.detailbutton {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    right: -43%;
+    top: -10px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.button-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+a {
+    text-decoration: none;
+    color : rgba(36, 94, 255, 0.89);
+}
+
+a:visited {
+    color: rgba(36, 94, 255, 0.89);
+}
+
+.result-grid-table {
+    display:flex;
+    flex-wrap: wrap;
+}
+
+
+.result-grid {
+    position: relative;
+    width: 26%;
+    height: 26%;
+    margin: 16px;
+    left: 36px;
+    top: 2px;
+}
+
+.result-grid img{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+
+.result-grid::after {
+    position: absolute;
+    top: 133px;
+    left: 0;
+    width: 100.5%;
+    height: 39%;
+    background-color: rgba(121, 121, 121, 0.432);
+    color:black;
+    content: "test";
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.result-grid:hover::after {
+    opacity: 1;
+}
