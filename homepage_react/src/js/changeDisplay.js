@@ -1,6 +1,6 @@
 import React from 'react';
 import Works from './works.js';
-import iruka1 from '../../public/images/iruka1.png';
+import '../css/changeDisplay.css';
 
 class ChangeDisplay extends React.Component {
   constructor(props) {
@@ -66,10 +66,7 @@ class ChangeDisplay extends React.Component {
         )}
         {this.state.isMailVisible && (
           <div className="toggle-mail">
-            <img id="main-img" src={iruka1} alt="main-img"/>
-            <div id="linkboshu">
-              ★★★相互リンク募集中です！★★★無断リンクもOK！
-            </div>
+            <img id="main-img" src={this.props.mainImg} alt="main-img"/>
           </div>
         )}
       </div>
