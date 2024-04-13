@@ -1,6 +1,7 @@
 import React from 'react';
 import Works from './works.js';
 import '../css/changeDisplay.css';
+import me from '../../public/images/profile_me.png';
 
 class ChangeDisplay extends React.Component {
   constructor(props) {
@@ -45,7 +46,7 @@ class ChangeDisplay extends React.Component {
       <div>
         {this.state.isProfileVisible && (
           <div id="profile">
-            profile
+            <img id="me" src={me} alt="profile-me" />
             profile
           </div>
         )}
@@ -66,7 +67,7 @@ class ChangeDisplay extends React.Component {
         )}
         {this.state.isMailVisible && (
           <div className="toggle-mail">
-            <img id="main-img" src={this.props.mainImg} alt="main-img"/>
+            <img id="main-img" src={this.props.mainImg} alt="main-img" />
           </div>
         )}
       </div>

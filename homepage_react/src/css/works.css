@@ -136,17 +136,18 @@ a:visited {
 
 .result-grid img{
     position: relative;
-    width: 100%;
-    height: 100%;
+    width: 111%;
+    height: 111%;
+    margin-bottom: -13%;
 }
 
 
 .result-grid::after {
     position: absolute;
-    top: 133px;
-    left: 0;
-    width: 100.5%;
-    height: 39%;
+    width: 111%;
+    height: 111%;
+    top:0%;
+    left:0%;
     background-color: rgba(121, 121, 121, 0.432);
     color:black;
     content: "test";
