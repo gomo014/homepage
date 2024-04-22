@@ -14,6 +14,7 @@ class SearchResult extends React.Component {
             sortAsc: true, // 昇順でソートされる
             showSortOptions: false, // ソートオプションを表示するかどうか
             isGridFlag: true, //true:グリッド表示、false:詳細表示
+            sortFilterPosition: '61px',
             filtersType: { // フィルターの初期値を設定する
                 'Webアプリ': false,
                 'Androidアプリ': false,
@@ -76,6 +77,30 @@ class SearchResult extends React.Component {
         this.setState({ filtersLanguage: updatedFilters });
     };
 
+    setButtonPositionGrid() {
+        document.getElementById('filters').style.left = '70px';
+        document.getElementById('gridbutton').style.right = '-644px';
+        document.getElementById('detailbutton').style.right = '-655px';
+    }
+
+    setButtonPositionDetail() {
+        document.getElementById('filters').style.left = '-40px';
+        document.getElementById('gridbutton').style.right = '-750px';
+        document.getElementById('detailbutton').style.right = '-761px';
+    }
+
+    //ソートウィンドウのチェックボックス制御
+    toggleCheckboxes() {
+        var subTree = document.querySelector(".sub-tree");
+        subTree.style.display = subTree.style.display === 'block' ? '' : 'block';
+    }
+
+    //ソートウィンドウのチェックボックス制御
+    toggleCheckboxes2() {
+        var subTree2 = document.querySelector(".sub-tree2");
+        subTree2.style.display = subTree2.style.display === 'block' ? '' : 'block';
+    }
+
     render() {
         // ソートを適用したキーの配列を作成する
         const sortedKeys = [...this.state.keys].sort((a, b) => {
@@ -97,22 +122,41 @@ class SearchResult extends React.Component {
 
         return (
             <div className="search-result">
-                <button className="filterbutton" onClick={this.toggleSortOptions}><img src={filterIcon} alt="Button Icon" className="button-img" /></button>
-                <button className="gridbutton" onClick={() => this.setState({ isGridFlag: true })}><img src={gridDisplay} alt="Button Icon" className="button-img" /></button>
-                <button className="detailbutton" onClick={() => this.setState({ isGridFlag: false })}><img src={detailDisplay} alt="Button Icon" className="button-img" /></button>
-                {this.state.showSortOptions && (
-                    <div className="sortWindowType">
-                        {Object.keys(this.state.filtersType).map((type, index) => (
-                            <div key={index}>
-                                <label>
-                                    <input type="checkbox" checked={this.state.filtersType[type]} onChange={() => this.handleTypeFilterChange(type)} />
-                                    {type}
-                                </label>
-                                <br />
-                            </div>
-                        ))}
-                    </div>
-                )}
+                <div id="filters">
+                    <button id="filterbutton" onClick={() => { this.toggleSortOptions(); }}><img src={filterIcon} alt="Button Icon" className="button-img" /></button>
+                    {this.state.showSortOptions && (
+                        <div id="sortWindowType">
+                            <ul id="tree">
+                                <li>
+                                    <div onClick={this.toggleCheckboxes}>コンテンツ</div>
+                                    <ul className="sub-tree">
+                                        {Object.keys(this.state.filtersType).map((type, index) => (
+                                            <div key={index}>
+                                                <label><input type="checkbox" checked={this.state.filtersType[type]} onChange={() => this.handleTypeFilterChange(type)} />{type}</label>
+                                                <br />
+                                            </div>
+                                        ))}
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul id="tree2">
+                                <li>
+                                    <div onClick={this.toggleCheckboxes2}>使用言語</div>
+                                    <ul className="sub-tree2">
+                                        {Object.keys(this.state.filtersLanguage).map((type, index) => (
+                                            <div key={index}>
+                                                <label><input type="checkbox" checked={this.state.filtersLanguage[type]} onChange={() => this.handleLanguageFilterChange(type)} />{type}</label>
+                                                <br />
+                                            </div>
+                                        ))}
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    )}
+                </div>
+                <button id="gridbutton" onClick={() => { this.setState({ isGridFlag: true }); this.setButtonPositionGrid(); }}><img src={gridDisplay} alt="Button Icon" className="button-img" /></button>
+                <button id="detailbutton" onClick={() => { this.setState({ isGridFlag: false }); this.setButtonPositionDetail(); }}><img src={detailDisplay} alt="Button Icon" className="button-img" /></button>
                 {this.state.isGridFlag && (
                     <div className="result-grid-table">
                         {filteredKeys.map((key, index) => (
@@ -126,17 +170,17 @@ class SearchResult extends React.Component {
                     <table className="result-table">
                         <thead>
                             <tr>
-                                <th className="urlKey"></th>
-                                <th className="key" onClick={(event) => this.handleSort(event, 'Title')}>タイトル</th>
-                                <th className="key" onClick={(event) => this.handleSort(event, 'Type')}>タイプ</th>
-                                <th className="key" onClick={(event) => this.handleSort(event, 'Language')}>使用技術</th>
-                                <th className="key" onClick={(event) => this.handleSort(event, 'CreatedDate')}>作成日</th>
+                                <th className="urlKey" style={{ width: "10%"}}></th>
+                                <th className="key" style={{ width: "30%" }} onClick={(event) => this.handleSort(event, 'Title')}>タイトル</th>
+                                <th className="key" style={{ width: "20%" }} onClick={(event) => this.handleSort(event, 'Type')}>コンテンツ</th>
+                                <th className="key" style={{ width: "25%" }} onClick={(event) => this.handleSort(event, 'Language')}>使用言語</th>
+                                <th className="key" style={{ width: "15%" }} onClick={(event) => this.handleSort(event, 'CreatedDate')}>作成日</th>
                             </tr>
                         </thead>
                         <tbody>
                             {filteredKeys.map((key, index) => (
                                 <tr key={index} className="result-row">
-                                    <td><a href={key.URL}>詳細</a></td>
+                                    <td style={{textAlign: "center" }}><a href={key.URL}>詳細</a></td>
                                     <td>{key.Title}</td>
                                     <td>{key.Type}</td>
                                     <td>{key.Language}</td>

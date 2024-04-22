@@ -34,33 +34,25 @@ class App extends React.Component {
       mainImg : pasokon,
       topLineImg : pasokonTopline,
       bottomLineImg : pasokonBottomline,
-      bgImage : pasokonBg
+      bgImage : pasokonBg,
     }
     this.ojiSet = {
       mainImg : oji,
       topLineImg : ojiTopline,
       bottomLineImg : ojiBottomLine,
-      bgImage : ojiBg
+      bgImage : ojiBg,
+      ojiFlag : true
     }
   }
 
   /** 画像設定 */
   setImages() {
     //サイト内画像設定
-    //this.imageSet = this.irukaSet;
+    this.imageSet = this.irukaSet;
     //this.imageSet = this.pasokonSet;
-    this.imageSet = this.ojiSet;
-    this.setOji();
+    //this.imageSet = this.ojiSet;
     //背景設定
     document.body.style.backgroundImage = `url(${this.imageSet.bgImage})`;
-  }
-
-  setOji() {
-    document.addEventListener("DOMContentLoaded", function () {
-      var mainContent = document.querySelector("#main-img");
-      mainContent.style.paddingTop = "50px";
-      mainContent.style.paddingBottom = "100px";
-    });
   }
 
   render() {

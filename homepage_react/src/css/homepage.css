@@ -1,3 +1,7 @@
+html {
+ overflow-y: scroll;
+}
+
 .container {
   display: flex;
   justify-content: center;
@@ -51,7 +55,8 @@
 }
 
 #menuImg {
-  margin-left: 6%;
+  width: 21%;
+  margin-left: 7%;
 }
 
 .menu {
@@ -72,6 +77,11 @@
   animation: displayAnim 0.5s forwards;
 }
 
+#works {
+  overflow : visible;
+  width: 1000px;
+}
+
 @keyframes displayAnim {
   0% {
     opacity:0;
@@ -79,66 +89,6 @@
   100% {
     opacity:1;
   }
-}
-
-.container #mail {
-  margin-top:80px;
-  animation-name: wAnimation;
-  animation-duration: 20s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-}
-
-@keyframes wAnimation {
-  0%, 100% {
-    transform: translate(0, 50%);
-  }
-  8% {
-    transform: translate(10%, 150%);
-  }
-  16% {
-    transform: translate(20%, 50%);
-  }
-  24% {
-    transform: translate(30%, 150%);
-  }
-  32% {
-    transform: translate(20%, 50%);
-  }
-  40% {
-    transform: translate(10%, 150%);
-  }
-  48% {
-    transform: translate(0, 50%);
-  }
-  56% {
-    transform: translate(-10%, 150%);
-  }
-  64% {
-    transform: translate(-20%, 50%);
-  }
-  72% {
-    transform: translate(-30%, 150%);
-  }
-  80% {
-    transform: translate(-20%, 50%);
-  }
-  88% {
-    transform: translate(-10%, 150%);
-  }
-}
-
-.container .yukkuri {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-.container .toggle-mail {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
 }
 
 .container .menuButton {

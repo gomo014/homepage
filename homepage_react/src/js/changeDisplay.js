@@ -2,6 +2,8 @@ import React from 'react';
 import Works from './works.js';
 import '../css/changeDisplay.css';
 import me from '../../public/images/profile_me.png';
+import koujichu from '../../public/images/koujichu.gif';
+import koujichu2 from '../../public/images/koujichu2.gif';
 
 class ChangeDisplay extends React.Component {
   constructor(props) {
@@ -41,13 +43,29 @@ class ChangeDisplay extends React.Component {
     }));
   }
 
+  getAge(year, month, day) {
+    const today = new Date();
+    const birthdate = new Date(year, month - 1, day);
+    const currentYearBirthday = new Date(today.getFullYear(), birthdate.getMonth(), birthdate.getDate());
+    let age = today.getFullYear() - birthdate.getFullYear();
+    if (today < currentYearBirthday) {
+      age--;
+    }
+    return age;
+  }
+
   render() {
     return (
       <div>
         {this.state.isProfileVisible && (
           <div id="profile">
             <img id="me" src={me} alt="profile-me" />
-            profile
+            <div id="profile-content">
+              <div className="profile-element">年齢：{this.getAge(1995, 9, 8)}<br /></div>
+              <div className="profile-element">スキル：Java、Python、Javascript<br /></div>
+              <div className="profile-element">趣味：音楽、ゲーム、サーフィン(ネット)<br /></div>
+              <div className="profile-element">好きな食べ物：かに<br /></div>
+            </div>
           </div>
         )}
         {this.state.isWorksVisible && (
@@ -57,12 +75,9 @@ class ChangeDisplay extends React.Component {
         )}
         {this.state.isLinkVisible && (
           <div id="link">
-            LinkLink<br />
-            LinkLink<br />
-            LinkLink<br />
-            LinkLink<br />
-            LinkLink<br />
-            LinkLink<br />
+            <img id="koujichu" src={koujichu} alt="koujichu" />
+            <img id="koujichu2" src={koujichu2} alt="koujichu2" />
+            <img id="koujichu" src={koujichu} alt="koujichu" />
           </div>
         )}
         {this.state.isMailVisible && (

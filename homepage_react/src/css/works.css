@@ -1,15 +1,16 @@
 .search-result {
     position:relative;
-    margin-top: 20px;
     width:80%;
     left:100px;
 }
 
 .result-table {
-    width: 100%;
+    position: relative;
+    width: 900px;
     border-collapse: collapse;
     border-bottom: 1px solid hwb(0 73% 27%);
     border-radius: 5px;
+    left: -51px;
 }
 
 .result-table th {
@@ -54,49 +55,35 @@
     position: relative;
 }
 
-.sortWindowType {
-    position: absolute;
-    z-index: 1;
-    top: 8.5%;
-    right: 83.5%;
-    width: 14%;
-    height: 92px;
-    padding: 8px;
-    background: white;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+#sortWindowType label {
     text-align: left;
 }
 
-.sortWindowType label {
-    text-align: left;
-}
-.filterbutton {
+#filterbutton {
     position: relative;
-    width: 30px;
-    height: 30px;
-    right: 43%;
+    width: 38px;
+    height: 38px;
+    left : unset;
+    top: -14px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+#gridbutton {
+    position: relative;
+    width: 38px;
+    height: 38px;
+    right: -644px;
     top: -10px;
     overflow: hidden;
     cursor: pointer;
 }
 
-.gridbutton {
+#detailbutton {
     position: relative;
-    width: 30px;
-    height: 30px;
-    right: -42%;
-    top: -10px;
-    overflow: hidden;
-    cursor: pointer;
-}
-
-.detailbutton {
-    position: relative;
-    width: 30px;
-    height: 30px;
-    right: -43%;
+    width: 38px;
+    height: 38px;
+    right: -655px;
     top: -10px;
     overflow: hidden;
     cursor: pointer;
@@ -120,16 +107,17 @@ a:visited {
 }
 
 .result-grid-table {
-    display:flex;
+    position: relative;
+    display: flex;
     flex-wrap: wrap;
+    top: -1rem;
 }
-
 
 .result-grid {
     position: relative;
-    width: 26%;
+    width: 24%;
     height: 26%;
-    margin: 16px;
+    margin: 22px;
     left: 36px;
     top: 2px;
 }
@@ -157,4 +145,55 @@ a:visited {
 
 .result-grid:hover::after {
     opacity: 1;
+}
+
+#filters{
+    position : relative;
+    top:35px;
+    left : 70px;
+    height : 31px;
+}
+
+#sortWindowType {
+    position: relative;
+    z-index: 1;
+    top: -14px;
+    width: 180px;
+    height: 200px;
+    padding: 8px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    overflow : auto;
+    white-space: nowrap;
+    overflow-y: scroll;
+}
+
+#sortWindowType li{
+    list-style: square;
+}
+
+.sub-tree, .sub-tree2 {
+    position:relative;
+    display: none;
+    top:5px;
+    left: -36px;
+}
+
+li {
+    cursor: pointer;
+}
+
+#tree, #tree2 {
+    position: relative;
+    left: -8px;
+    top: -10px;
+
+}
+
+.sub-tree div, .sub-tree2 div{
+    position: relative;
+    left: -14px;
 }
