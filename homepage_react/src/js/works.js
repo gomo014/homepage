@@ -3,7 +3,6 @@ import '../css/works.css';
 import filterIcon from '../../public/images/filterIcon.png';
 import gridDisplay from '../../public/images/gridDisplay.png';
 import detailDisplay from '../../public/images/detailDisplay.png';
-import black from '../../public/images/black.png';
 import axios from 'axios';
 
 class SearchResult extends React.Component {
@@ -163,7 +162,7 @@ class SearchResult extends React.Component {
                         {filteredKeys.map((key, index) => (
                             <div className="result-grid" key={index}>
                                 <img className="data-img" src={key.Thumbnail} alt={index} />
-                                <a href={key.URL}><img className="black" src={black} alt={black} /></a>
+                                <a href={key.URL} className="black" target="_blank">「{key.Title}」<br/>{key.Type}</a>
                             </div>
                         ))}
                     </div>
@@ -182,7 +181,7 @@ class SearchResult extends React.Component {
                         <tbody>
                             {filteredKeys.map((key, index) => (
                                 <tr key={index} className="result-row">
-                                    <td style={{textAlign: "center" }}><a href={key.URL}>詳細</a></td>
+                                    <td style={{textAlign: "center" }}><a href={key.URL} target="_blank">詳細</a></td>
                                     <td>{key.Title}</td>
                                     <td>{key.Type}</td>
                                     <td>{key.Language}</td>

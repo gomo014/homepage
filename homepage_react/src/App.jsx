@@ -28,20 +28,22 @@ class App extends React.Component {
       mainImg : iruka,
       topLineImg : irukaTopLine,
       bottomLineImg : irukaBottomLine,
-      bgImage : irukaBg
+      bgImage : irukaBg,
+      irukaFlag : true
     }
     this.pasokonSet = {
       mainImg : pasokon,
       topLineImg : pasokonTopline,
       bottomLineImg : pasokonBottomline,
       bgImage : pasokonBg,
+      irukaFlag : false
     }
     this.ojiSet = {
       mainImg : oji,
       topLineImg : ojiTopline,
       bottomLineImg : ojiBottomLine,
       bgImage : ojiBg,
-      ojiFlag : true
+      irukaFlag : false
     }
   }
 
@@ -75,7 +77,7 @@ class App extends React.Component {
               <img id="linkImg" className="menuButton" src={link} alt="linkImg" />
             </a>
           </div>
-          <ChangeDisplay ref={this.changeDisplayRef} mainImg={this.imageSet.mainImg}/>
+          <ChangeDisplay ref={this.changeDisplayRef} mainImg={this.imageSet.mainImg} irukaFlag={this.imageSet.irukaFlag}/>
           <img id="bottomline-img" src={this.imageSet.bottomLineImg} alt="bottomLine-img"/>
         </div>
       </div>

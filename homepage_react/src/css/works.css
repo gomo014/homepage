@@ -1,7 +1,7 @@
 .search-result {
-    position:relative;
-    width:80%;
-    left:100px;
+    position: relative;
+    width: 80%;
+    left: 100px;
 }
 
 .result-table {
@@ -11,6 +11,7 @@
     border-bottom: 1px solid hwb(0 73% 27%);
     border-radius: 5px;
     left: -51px;
+    animation: displayAnim 0.2s forwards;
 }
 
 .result-table th {
@@ -51,7 +52,7 @@
     background-color: rgb(215, 243, 255);
 }
 
-.result-table th > .key {
+.result-table th>.key {
     position: relative;
 }
 
@@ -63,7 +64,7 @@
     position: relative;
     width: 38px;
     height: 38px;
-    left : unset;
+    left: unset;
     top: -14px;
     overflow: hidden;
     cursor: pointer;
@@ -99,7 +100,7 @@
 
 a {
     text-decoration: none;
-    color : rgba(36, 94, 255, 0.89);
+    color: rgba(36, 94, 255, 0.89);
 }
 
 a:visited {
@@ -111,6 +112,7 @@ a:visited {
     display: flex;
     flex-wrap: wrap;
     top: -1rem;
+    animation: displayAnim 0.2s forwards;
 }
 
 .result-grid {
@@ -136,20 +138,26 @@ a:visited {
     height: 213px;
     top: -114%;
     left: 0%;
-    opacity:0;
+    opacity: 0;
     content: "test";
-    transition: 0.2s
+    transition: 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color: white !important;
+    font-weight: bold;
 }
 
 .black:hover {
-    opacity : 0.7;
+    opacity: 0.8;
 }
 
-#filters{
-    position : relative;
-    top:35px;
-    left : 70px;
-    height : 31px;
+#filters {
+    position: relative;
+    top: 35px;
+    left: 70px;
+    height: 31px;
 }
 
 #sortWindowType {
@@ -164,19 +172,21 @@ a:visited {
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     text-align: left;
-    overflow : auto;
+    overflow: auto;
     white-space: nowrap;
     overflow-y: scroll;
+    animation: displayAnim 0.2s forwards;
 }
 
-#sortWindowType li{
+#sortWindowType li {
     list-style: square;
 }
 
-.sub-tree, .sub-tree2 {
-    position:relative;
+.sub-tree,
+.sub-tree2 {
+    position: relative;
     display: none;
-    top:5px;
+    top: 5px;
     left: -36px;
 }
 
@@ -184,14 +194,26 @@ li {
     cursor: pointer;
 }
 
-#tree, #tree2 {
+#tree,
+#tree2 {
     position: relative;
     left: -8px;
     top: -10px;
 
 }
 
-.sub-tree div, .sub-tree2 div{
+.sub-tree div,
+.sub-tree2 div {
     position: relative;
     left: -14px;
+}
+
+@keyframes displayAnim {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }

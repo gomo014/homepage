@@ -38,22 +38,6 @@ html {
   margin-top:10px;
 }
 
-.container .yukkuri {
-  margin-top: 0.5%;
-  animation: slide 4s linear infinite;
-}
-
-@keyframes slide {
-  0%, 50%, 100% { transform: translateX(0); }
-  25% { transform: translateX(5%); }
-  75% { transform: translateX(-5%); }
-}
-
-.container #manekineko {
-  width: 2%;
-  height: 2%;
-}
-
 #menuImg {
   width: 21%;
   margin-left: 7%;

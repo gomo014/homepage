@@ -47,3 +47,21 @@
     left: 34%;
     margin: 1%;
 }
+
+#iruka-img {
+    animation: irukaAnim 10s forwards;
+}
+
+@keyframes displayAnim {
+    0% {
+        top: -20px;
+    }
+
+    50% {
+        top: 0px;
+    }
+
+    100% {
+        top:20px;
+    }
+}
