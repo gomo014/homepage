@@ -52,15 +52,13 @@
     animation: irukaAnim 10s forwards;
 }
 
-@keyframes displayAnim {
+@keyframes irukaAnim {
     0% {
         top: -20px;
     }
-
     50% {
         top: 0px;
     }
-
     100% {
         top:20px;
     }

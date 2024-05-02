@@ -83,3 +83,9 @@ html {
   width:90%;
   
 }
+
+#old-pc {
+  position:absolute;
+  top:0px;
+  left:0px;
+}

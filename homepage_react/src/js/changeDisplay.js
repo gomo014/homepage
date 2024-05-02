@@ -4,7 +4,6 @@ import '../css/changeDisplay.css';
 import me from '../../public/images/profile_me.png';
 import koujichu from '../../public/images/koujichu.gif';
 import koujichu2 from '../../public/images/koujichu2.gif';
-import irukaImg from '../../public/images/irukaImg.png';
 
 class ChangeDisplay extends React.Component {
   constructor(props) {
@@ -84,11 +83,6 @@ class ChangeDisplay extends React.Component {
         {this.state.isMailVisible && (
           <div className="toggle-mail">
             <img id="main-img" src={this.props.mainImg} alt="main-img" />
-          </div>
-        )}
-        {(this.state.isMailVisible && this.props.irukaFlag) && (
-          <div className="toggle-mail">
-            <img id="iruka-img" src={irukaImg} alt="iruka-img" />
           </div>
         )}
       </div>
