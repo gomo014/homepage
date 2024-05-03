@@ -2,17 +2,15 @@ html {
  overflow-y: scroll;
 }
 
+body {
+  background-color: white;
+}
+
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
-
-.container #topline-img{
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .container table {
@@ -26,6 +24,9 @@ html {
 }
 
 #topline-img {
+  display:flex;
+  justify-content: center;
+  align-items: center;
   width:80%;
   margin-bottom:20px;
 }
@@ -48,11 +49,18 @@ html {
 }
 
 .container > div.main-content {
+  position: absolute;
+  top: 33%;
+  left: 51.5%;
+  transform: translate(-50%, -50%) scale(0.35);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width:1000px;
+  width: 1000px;
+  height:100%;  
+  padding: 40%;
+
 }
 
 #profile, #works, #link {
@@ -86,6 +94,10 @@ html {
 
 #old-pc {
   position:absolute;
-  top:0px;
-  left:0px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height:100%;
+  pointer-events: none;
 }
+

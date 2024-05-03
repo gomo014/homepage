@@ -13,7 +13,7 @@ import pasokonBg from '../public/images/pasokonBg.jpg';
 import pasokonTopline from '../public/images/pasokonTopline.png';
 import pasokonBottomline from '../public/images/pasokonBottomline.gif';
 import oji from '../public/images/oji.gif';
-import ojiTopline from '../public/images/ojiTopline.png';
+//import ojiTopline from '../public/images/ojiTopline.png';
 import ojiBottomLine from '../public/images/ojiBottomLine.gif';
 import ojiBg from '../public/images/ojiBg.png';
 import oldpc from '../public/images/old-pc.png';
@@ -39,7 +39,7 @@ class App extends React.Component {
     }
     this.ojiSet = {
       mainImg: oji,
-      topLineImg: ojiTopline,
+      // topLineImg: ojiTopline,
       bottomLineImg: ojiBottomLine,
       bgImage: ojiBg,
     }
@@ -67,35 +67,35 @@ class App extends React.Component {
     なぜかsetImageが２回実行されて、背景だけ２回目のもので設定されてしまうので、
     他に合わせて背景も１回目のもので設定するようにする
     */
-    if (!document.body.style.backgroundImage) {
-      document.body.style.backgroundImage = `url(${this.imageSet.bgImage})`;
-    }
+    //if (!document.body.style.backgroundImage) {
+    //  document.body.style.backgroundImage = `url(${this.imageSet.bgImage})`;
+    //}
   }
 
   render() {
     this.setImages();
     return (
-      <div className="container">
-        <div id="topline-img">
-          <img src={this.imageSet.topLineImg} />
-        </div>
-        <div className="main-content">
-          <img src={menu} alt="menu" id="menuImg" />
-          <div width="230" className="selectMenu">
-            <a href="#" onClick={() => this.changeDisplayRef.current.handleProfileImgClick()}>
-              <img id="profileImg" className="menuButton" src={profile} alt="profileImg" />
-            </a>
-            <a href="#" onClick={() => this.changeDisplayRef.current.handleWorksImgClick()}>
-              <img id="worksImg" className="menuButton" src={works} alt="worksImg" />
-            </a>
-            <a href="#" onClick={() => this.changeDisplayRef.current.handleLinkImgClick()}>
-              <img id="linkImg" className="menuButton" src={link} alt="linkImg" />
-            </a>
+      <div>
+        <div className="container">
+          <div className="main-content" style={{ backgroundImage: `url(${this.imageSet.bgImage})` }}>
+            <div id="topline-img"><img src={this.imageSet.topLineImg} /></div>
+            <img src={menu} alt="menu" id="menuImg" />
+            <div width="230" className="selectMenu">
+              <a href="#" onClick={() => this.changeDisplayRef.current.handleProfileImgClick()}>
+                <img id="profileImg" className="menuButton" src={profile} alt="profileImg" />
+              </a>
+              <a href="#" onClick={() => this.changeDisplayRef.current.handleWorksImgClick()}>
+                <img id="worksImg" className="menuButton" src={works} alt="worksImg" />
+              </a>
+              <a href="#" onClick={() => this.changeDisplayRef.current.handleLinkImgClick()}>
+                <img id="linkImg" className="menuButton" src={link} alt="linkImg" />
+              </a>
+            </div>
+            <ChangeDisplay ref={this.changeDisplayRef} mainImg={this.imageSet.mainImg} />
+            <img id="bottomline-img" src={this.imageSet.bottomLineImg} alt="bottomLine-img" />
           </div>
-          <ChangeDisplay ref={this.changeDisplayRef} mainImg={this.imageSet.mainImg} />
-          <img id="bottomline-img" src={this.imageSet.bottomLineImg} alt="bottomLine-img" />
-          <img id="old-pc" src={oldpc} alt="old-pc" hidden/>
         </div>
+        <img id="old-pc" src={oldpc} alt="old-pc" />
       </div>
     );
   }
