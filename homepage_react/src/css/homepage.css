@@ -1,5 +1,5 @@
 html {
- overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 body {
@@ -7,10 +7,17 @@ body {
 }
 
 .container {
+  position: absolute;
+  top: 34%;
+  left: 51%;
+  transform: translate(-50%, -50%) scale(0.35);
+  width: 1123px;
+  height: 877px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  overflow-y: scroll;
 }
 
 .container table {
@@ -24,11 +31,11 @@ body {
 }
 
 #topline-img {
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
-  width:80%;
-  margin-bottom:20px;
+  width: 80%;
+  margin-bottom: 20px;
 }
 
 .counterContent {
@@ -36,50 +43,51 @@ body {
 }
 
 .container .selectMenu {
-  margin-top:10px;
+  margin-top: 10px;
 }
 
 #menuImg {
-  width: 21%;
-  margin-left: 7%;
+  width: 209px;
+  margin-left: 78px;
 }
 
 .menu {
   display: table-cell;
 }
 
-.container > div.main-content {
+.container>div.main-content {
+  padding-inline: 10%;
   position: absolute;
-  top: 33%;
-  left: 51.5%;
-  transform: translate(-50%, -50%) scale(0.35);
+  top: -7%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 1000px;
-  height:100%;  
-  padding: 40%;
-
+  height: unset;
+  padding-top: 10%;
+  padding-left: 17%;
+  padding-bottom: 17%;
 }
 
-#profile, #works, #link {
+#profile,
+#works,
+#link {
   position: relative;
-  overflow: hidden;
   animation: displayAnim 0.5s forwards;
 }
 
 #works {
-  overflow : visible;
+  overflow: visible;
   width: 1000px;
 }
 
 @keyframes displayAnim {
   0% {
-    opacity:0;
+    opacity: 0;
   }
+
   100% {
-    opacity:1;
+    opacity: 1;
   }
 }
 
@@ -88,16 +96,41 @@ body {
 }
 
 .container #main-img {
-  width:90%;
-  
+  width: 90%;
+
 }
 
 #old-pc {
-  position:absolute;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height:100%;
+  height: 100%;
   pointer-events: none;
 }
 
+#white-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  opacity: 1;
+  pointer-events: none;
+  animation: fadeOut 5s forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

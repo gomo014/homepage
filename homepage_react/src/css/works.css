@@ -217,3 +217,59 @@ li {
         opacity: 1;
     }
 }
+
+#content-screen {
+    position: relative;
+    height: 400px;
+    width: 874px;
+    left: 65px;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+#screen-back-link {
+    position: relative;
+    left: 36px;
+    top: 34px;
+    font-weight: bold;
+    align-items: center;
+}
+
+#content {
+    position: relative;
+    top: 40px;
+    height: 300px;
+    width: 80%;
+    left: 10%;
+}
+
+#content-img {
+    position:relative;
+    top:100px;
+}
+
+#title {
+    position: relative;
+    top: -57px;
+    left: 133px;
+}
+
+#description {
+    position: relative;
+    top: -50px;
+    left: 131px;
+}
+
+#language {
+    position: relative;
+    left: 130px;
+}
+
+#content-link {
+    position: relative;
+    left: 130px;
+}
+
+#github-link {
+    position:relative;
+    left:130px
+}

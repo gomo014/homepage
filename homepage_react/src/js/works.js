@@ -3,6 +3,7 @@ import '../css/works.css';
 import filterIcon from '../../public/images/filterIcon.png';
 import gridDisplay from '../../public/images/gridDisplay.png';
 import detailDisplay from '../../public/images/detailDisplay.png';
+import backArrow from '../../public/images/t_arrowb.gif';
 import axios from 'axios';
 
 class SearchResult extends React.Component {
@@ -14,19 +15,27 @@ class SearchResult extends React.Component {
             sortAsc: true, // 昇順でソートされる
             showSortOptions: false, // ソートオプションを表示するかどうか
             isGridFlag: true, //true:グリッド表示、false:詳細表示
+            isContentScreenFlag: false,
             sortFilterPosition: '61px',
-            filtersType: { // フィルターの初期値を設定する
+            filtersType: {
                 'Webアプリ': false,
                 'Androidアプリ': false,
                 'iPhoneアプリ': false,
                 'API': false,
             },
-            filtersLanguage: { // フィルターの初期値を設定する
-                'Java': false,
+            filtersLanguage: {
                 'Swift': false,
                 'Python': false,
                 'Javascript': false
             },
+            screenData: {
+                image: '',
+                title: '',
+                description: '',
+                language: '',
+                url: '',
+                gitUrl: '',
+            }
         };
     }
 
@@ -101,6 +110,24 @@ class SearchResult extends React.Component {
         subTree2.style.display = subTree2.style.display === 'block' ? '' : 'block';
     }
 
+    //詳細画面用のデータをセット
+    setData(key) {
+        const data = {
+            image: key.Image,
+            title: key.Title,
+            description: key.Description,
+            language: key.Language,
+            url: key.URL,
+            gitUrl: key.GitURL,
+        }
+
+        this.setState({
+            screenData: data,
+            isContentScreenFlag: true
+        });
+
+    }
+
     render() {
         // ソートを適用したキーの配列を作成する
         const sortedKeys = [...this.state.keys].sort((a, b) => {
@@ -121,75 +148,94 @@ class SearchResult extends React.Component {
         });
 
         return (
-            <div className="search-result">
-                <div id="filters">
-                    <button id="filterbutton" onClick={() => { this.toggleSortOptions(); }}><img src={filterIcon} alt="Button Icon" className="button-img" /></button>
-                    {this.state.showSortOptions && (
-                        <div id="sortWindowType">
-                            <ul id="tree">
-                                <li>
-                                    <div onClick={this.toggleCheckboxes}>コンテンツ</div>
-                                    <ul className="sub-tree">
-                                        {Object.keys(this.state.filtersType).map((type, index) => (
-                                            <div key={index}>
-                                                <label><input type="checkbox" checked={this.state.filtersType[type]} onChange={() => this.handleTypeFilterChange(type)} />{type}</label>
-                                                <br />
-                                            </div>
-                                        ))}
+            <div>
+                {!this.state.isContentScreenFlag && (
+                    <div className="search-result">
+                        <div id="filters">
+                            <button id="filterbutton" onClick={() => { this.toggleSortOptions(); }}><img src={filterIcon} alt="Button Icon" className="button-img" /></button>
+                            {this.state.showSortOptions && (
+                                <div id="sortWindowType">
+                                    <ul id="tree">
+                                        <li>
+                                            <div onClick={this.toggleCheckboxes}>コンテンツ</div>
+                                            <ul className="sub-tree">
+                                                {Object.keys(this.state.filtersType).map((type, index) => (
+                                                    <div key={index}>
+                                                        <label><input type="checkbox" checked={this.state.filtersType[type]} onChange={() => this.handleTypeFilterChange(type)} />{type}</label>
+                                                        <br />
+                                                    </div>
+                                                ))}
+                                            </ul>
+                                        </li>
                                     </ul>
-                                </li>
-                            </ul>
-                            <ul id="tree2">
-                                <li>
-                                    <div onClick={this.toggleCheckboxes2}>使用言語</div>
-                                    <ul className="sub-tree2">
-                                        {Object.keys(this.state.filtersLanguage).map((type, index) => (
-                                            <div key={index}>
-                                                <label><input type="checkbox" checked={this.state.filtersLanguage[type]} onChange={() => this.handleLanguageFilterChange(type)} />{type}</label>
-                                                <br />
-                                            </div>
-                                        ))}
+                                    <ul id="tree2">
+                                        <li>
+                                            <div onClick={this.toggleCheckboxes2}>使用言語</div>
+                                            <ul className="sub-tree2">
+                                                {Object.keys(this.state.filtersLanguage).map((type, index) => (
+                                                    <div key={index}>
+                                                        <label><input type="checkbox" checked={this.state.filtersLanguage[type]} onChange={() => this.handleLanguageFilterChange(type)} />{type}</label>
+                                                        <br />
+                                                    </div>
+                                                ))}
+                                            </ul>
+                                        </li>
                                     </ul>
-                                </li>
-                            </ul>
+                                </div>
+                            )}
                         </div>
-                    )}
-                </div>
-                <button id="gridbutton" onClick={() => { this.setState({ isGridFlag: true }); this.setButtonPositionGrid(); }}><img src={gridDisplay} alt="Button Icon" className="button-img" /></button>
-                <button id="detailbutton" onClick={() => { this.setState({ isGridFlag: false }); this.setButtonPositionDetail(); }}><img src={detailDisplay} alt="Button Icon" className="button-img" /></button>
-                {this.state.isGridFlag && (
-                    <div className="result-grid-table">
-                        {filteredKeys.map((key, index) => (
-                            <div className="result-grid" key={index}>
-                                <img className="data-img" src={key.Thumbnail} alt={index} />
-                                <a href={key.URL} className="black" target="_blank">「{key.Title}」<br/>{key.Type}</a>
+
+                        <button id="gridbutton" onClick={() => { this.setState({ isGridFlag: true }); this.setButtonPositionGrid(); }}><img src={gridDisplay} alt="Button Icon" className="button-img" /></button>
+                        <button id="detailbutton" onClick={() => { this.setState({ isGridFlag: false }); this.setButtonPositionDetail(); }}><img src={detailDisplay} alt="Button Icon" className="button-img" /></button>
+                        {this.state.isGridFlag && (
+                            <div className="result-grid-table">
+                                {filteredKeys.map((key, index) => (
+                                    <div className="result-grid" key={index}>
+                                        <img className="data-img" src={key.Thumbnail} alt={index} />
+                                        <a href="#" className="black" onClick={() => this.setData(key)}>「{key.Title}」<br />{key.Type}</a>
+                                    </div>
+                                ))}
                             </div>
-                        ))}
+                        )}
+                        {!this.state.isGridFlag && (
+                            <table className="result-table">
+                                <thead>
+                                    <tr>
+                                        <th className="urlKey" style={{ width: "10%" }}></th>
+                                        <th className="key" style={{ width: "30%" }} onClick={(event) => this.handleSort(event, 'Title')}>タイトル</th>
+                                        <th className="key" style={{ width: "20%" }} onClick={(event) => this.handleSort(event, 'Type')}>コンテンツ</th>
+                                        <th className="key" style={{ width: "25%" }} onClick={(event) => this.handleSort(event, 'Language')}>使用言語</th>
+                                        <th className="key" style={{ width: "15%" }} onClick={(event) => this.handleSort(event, 'CreatedDate')}>作成日</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {filteredKeys.map((key, index) => (
+                                        <tr key={index} className="result-row">
+                                            <td style={{ textAlign: "center" }}><a href="#" target="_blank">詳細</a></td>
+                                            <td>{key.Title}</td>
+                                            <td>{key.Type}</td>
+                                            <td>{key.Language}</td>
+                                            <td>{key.CreatedDate}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        )}
+
                     </div>
                 )}
-                {!this.state.isGridFlag && (
-                    <table className="result-table">
-                        <thead>
-                            <tr>
-                                <th className="urlKey" style={{ width: "10%"}}></th>
-                                <th className="key" style={{ width: "30%" }} onClick={(event) => this.handleSort(event, 'Title')}>タイトル</th>
-                                <th className="key" style={{ width: "20%" }} onClick={(event) => this.handleSort(event, 'Type')}>コンテンツ</th>
-                                <th className="key" style={{ width: "25%" }} onClick={(event) => this.handleSort(event, 'Language')}>使用言語</th>
-                                <th className="key" style={{ width: "15%" }} onClick={(event) => this.handleSort(event, 'CreatedDate')}>作成日</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {filteredKeys.map((key, index) => (
-                                <tr key={index} className="result-row">
-                                    <td style={{textAlign: "center" }}><a href={key.URL} target="_blank">詳細</a></td>
-                                    <td>{key.Title}</td>
-                                    <td>{key.Type}</td>
-                                    <td>{key.Language}</td>
-                                    <td>{key.CreatedDate}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                {this.state.isContentScreenFlag && (
+                    <div id="content-screen">
+                        <a href="#" id="screen-back-link" onClick={() => {this.setState({isContentScreenFlag: false})}}><img src={backArrow} alt="back-arrow" id="back-arrow" /> 前に戻る</a>
+                        <div id="content">
+                            <img src={this.state.screenData.image} id="content-img"/><br />
+                            <div id="title">タイトル：{this.state.screenData.title}</div><br />
+                            <div id="description">{this.state.screenData.description}</div><br />
+                            <div id="language">{this.state.screenData.language}</div><br />
+                            <a href={this.state.screenData.url} id="content-link">作品ページにとぶ</a><br />
+                            <a href={this.state.screenData.gitUrl} id="github-link">GitHub</a><br />
+                        </div>
+                    </div>
                 )}
             </div>
         );
