@@ -61,7 +61,7 @@ class ChangeDisplay extends React.Component {
           <div id="profile">
             <img id="me" src={me} alt="profile-me" />
             <div id="profile-content">
-              <div className="profile-element">年齢：{this.getAge(1995, 9, 8)}さい<br /></div>
+              <div className="profile-element">年齢：{this.getAge(1995, 9, 8)}<br /></div>
               <div className="profile-element">スキル：Java、Python、Javascript<br /></div>
               <div className="profile-element">趣味：音楽、ゲーム、サーフィン(ネット)<br /></div>
               <div className="profile-element">好きな食べ物：かに<br /></div>

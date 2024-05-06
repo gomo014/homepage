@@ -211,7 +211,7 @@ class SearchResult extends React.Component {
                                 <tbody>
                                     {filteredKeys.map((key, index) => (
                                         <tr key={index} className="result-row">
-                                            <td style={{ textAlign: "center" }}><a href="#" target="_blank">詳細</a></td>
+                                            <td style={{ textAlign: "center" }}><a href="#" onClick={() => this.setData(key)}>詳細</a></td>
                                             <td>{key.Title}</td>
                                             <td>{key.Type}</td>
                                             <td>{key.Language}</td>

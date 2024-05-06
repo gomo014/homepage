@@ -19,6 +19,31 @@ import ojiBg from '../public/images/ojiBg.png';
 import oldpc from '../public/images/old-pc.png';
 import './css/homepage.css';
 
+//ブラウザの初期変更時・サイズ変更時に、ブラウザサイズにあわせたコンテンツのサイズを調整
+document.addEventListener('DOMContentLoaded', function () {
+  resizeContainer();
+});
+window.addEventListener('resize', function () {
+  resizeContainer();
+});
+
+function resizeContainer() {
+  const iw = window.innerWidth;
+  const ih = window.innerHeight;
+  const whRatio = iw / ih;
+  const diff = whRatio - 2.1;
+  const adjustedValue = (-50.1 - (diff * 1.5)) + '%';
+  let AdjustScale;
+  const container = document.getElementsByClassName('container')[0];
+
+  if (document.getElementById('old-pc').style.height === "200%") {
+    AdjustScale = window.innerHeight * 0.00078;
+  } else {
+    AdjustScale = window.innerHeight * 0.0004;
+  }
+  container.style.transform = `translate(${adjustedValue}, -50%) scale(${AdjustScale})`;
+};
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -43,6 +68,7 @@ class App extends React.Component {
       bottomLineImg: ojiBottomLine,
       bgImage: ojiBg,
     }
+    this.isClickedMonitor = false
   }
 
   /** 画像設定 */
@@ -64,20 +90,24 @@ class App extends React.Component {
   }
 
   setPCImageAfterClick() {
-    const containerStyle = document.querySelector('.container').style;
-    containerStyle.top = "57%";
-    containerStyle.left = "50.4%";
-    const oldPCStyle = document.getElementById('old-pc').style;
-    oldPCStyle.top = "90%";
-    oldPCStyle.left = "48%";
-    oldPCStyle.height = "200%";
+    if (!this.isClickedMonitor) {
+      const containerStyle = document.querySelector('.container').style;
+      containerStyle.top = "51%";
+      containerStyle.left = "50.45%";
+      const oldPCStyle = document.getElementById('old-pc').style;
+      oldPCStyle.top = "83%";
+      oldPCStyle.left = "48%";
+      oldPCStyle.height = "200%";
+      resizeContainer()
+      this.isClickedMonitor = true;
+    }
   }
 
   render() {
     this.setImages();
     return (
       <div>
-        <div className="container" onClick={() =>{this.setPCImageAfterClick()}}>
+        <div className="container" onClick={() => { this.setPCImageAfterClick() }}>
           <div className="main-content" style={{ backgroundImage: `url(${this.imageSet.bgImage})` }}>
             <div id="topline-img"><img src={this.imageSet.topLineImg} /></div>
             <img src={menu} alt="menu" id="menuImg" />
