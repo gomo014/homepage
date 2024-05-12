@@ -19,30 +19,60 @@ import ojiBg from '../public/images/ojiBg.png';
 import oldpc from '../public/images/old-pc.png';
 import './css/homepage.css';
 
+let clickFlag = false;
+
 //ブラウザの初期変更時・サイズ変更時に、ブラウザサイズにあわせたコンテンツのサイズを調整
 document.addEventListener('DOMContentLoaded', function () {
   resizeContainer();
 });
 window.addEventListener('resize', function () {
-  resizeContainer();
+  if (!clickFlag) {
+    resizeContainer();
+  } else {
+    resizeContainerAfterChanged();
+  }
+
 });
 
 function resizeContainer() {
-  const iw = window.innerWidth;
-  const ih = window.innerHeight;
-  const whRatio = iw / ih;
+  const whRatio = window.innerWidth / window.innerHeight;
   const diff = whRatio - 2.1;
   const adjustedValue = (-50.1 - (diff * 1.5)) + '%';
-  let AdjustScale;
-  const container = document.getElementsByClassName('container')[0];
-
-  if (document.getElementById('old-pc').style.height === "200%") {
-    AdjustScale = window.innerHeight * 0.00078;
-  } else {
-    AdjustScale = window.innerHeight * 0.0004;
-  }
+  let AdjustScale = window.innerHeight * 0.0004;
+  const container = document.querySelector('#beforeClick .container');
+  const pointerZone = document.querySelector('#beforeClick #pointer-zone');
   container.style.transform = `translate(${adjustedValue}, -50%) scale(${AdjustScale})`;
+  pointerZone.style.transform = `translate(${adjustedValue}, -50%) scale(${AdjustScale})`;
+
+  var caution = document.getElementById('before-caution');
+
+  if (whRatio > 2.18) {
+    caution.classList.add('visible');
+    caution.classList.remove('hidden');
+  } else {
+    caution.classList.add('hidden');
+    caution.classList.remove('visible');
+  }
 };
+
+function resizeContainerAfterChanged() {
+  const whRatio = window.innerWidth / window.innerHeight;
+  const diff = whRatio - 2.1;
+  const adjustedValue = (-50.1 - (diff * 1.5)) + '%';
+  let AdjustScale = window.innerHeight * 0.00078;
+  const container = document.querySelector('#afterClick .container');
+  container.style.transform = `translate(${adjustedValue}, -50%) scale(${AdjustScale})`;
+  var caution = document.getElementById('after-caution');
+
+  if (whRatio > 2.18) {
+    caution.classList.add('visible');
+    caution.classList.remove('hidden');
+  } else {
+    caution.classList.add('hidden');
+    caution.classList.remove('visible');
+  }
+};
+
 
 class App extends React.Component {
   constructor(props) {
@@ -68,7 +98,6 @@ class App extends React.Component {
       bottomLineImg: ojiBottomLine,
       bgImage: ojiBg,
     }
-    this.isClickedMonitor = false
   }
 
   /** 画像設定 */
@@ -89,45 +118,75 @@ class App extends React.Component {
     }
   }
 
-  setPCImageAfterClick() {
-    if (!this.isClickedMonitor) {
-      const containerStyle = document.querySelector('.container').style;
-      containerStyle.top = "51%";
-      containerStyle.left = "50.45%";
-      const oldPCStyle = document.getElementById('old-pc').style;
-      oldPCStyle.top = "83%";
-      oldPCStyle.left = "48%";
-      oldPCStyle.height = "200%";
-      resizeContainer()
-      this.isClickedMonitor = true;
-    }
+  changeMainScreenSizeOnPcClick() {
+    document.getElementById('beforeClick').style.opacity = '0';
+    document.getElementById('afterClick').style.opacity = '1';
+    setTimeout(function() {
+      document.getElementById('beforeClick').style.display = 'none';
+    }, 1000);
+
+    const containerStyle = document.querySelector('#afterClick .container').style;
+    containerStyle.top = "51%";
+    containerStyle.left = "50.45%";
+
+    //PC画像リサイズ
+    const oldPCStyle = document.querySelector('#after-old-pc').style;
+    oldPCStyle.top = "83%";
+    oldPCStyle.left = "48%";
+    oldPCStyle.height = "200%";
+
+    clickFlag = true;
+
+    //PC内画面リサイズ
+    resizeContainerAfterChanged();
   }
 
   render() {
     this.setImages();
     return (
       <div>
-        <div className="container" onClick={() => { this.setPCImageAfterClick() }}>
-          <div className="main-content" style={{ backgroundImage: `url(${this.imageSet.bgImage})` }}>
-            <div id="topline-img"><img src={this.imageSet.topLineImg} /></div>
-            <img src={menu} alt="menu" id="menuImg" />
-            <div width="230" className="selectMenu">
-              <a href="#" onClick={() => this.changeDisplayRef.current.handleProfileImgClick()}>
+        <div id="beforeClick">
+          <div id="pointer-zone"  onClick={() => { this.changeMainScreenSizeOnPcClick() }}></div>
+          <div className="container">
+            <div className="main-content" style={{ backgroundImage: `url(${this.imageSet.bgImage})` }}>
+              <div id="topline-img"><img src={this.imageSet.topLineImg} /></div>
+              <img src={menu} alt="menu" id="menuImg" />
+              <div width="230" className="selectMenu">
                 <img id="profileImg" className="menuButton" src={profile} alt="profileImg" />
-              </a>
-              <a href="#" onClick={() => this.changeDisplayRef.current.handleWorksImgClick()}>
                 <img id="worksImg" className="menuButton" src={works} alt="worksImg" />
-              </a>
-              <a href="#" onClick={() => this.changeDisplayRef.current.handleLinkImgClick()}>
                 <img id="linkImg" className="menuButton" src={link} alt="linkImg" />
-              </a>
+              </div>
+              <ChangeDisplay ref={this.changeDisplayRef} mainImg={this.imageSet.mainImg} />
+              <img id="bottomline-img" src={this.imageSet.bottomLineImg} alt="bottomLine-img" />
             </div>
-            <ChangeDisplay ref={this.changeDisplayRef} mainImg={this.imageSet.mainImg} />
-            <img id="bottomline-img" src={this.imageSet.bottomLineImg} alt="bottomLine-img" />
           </div>
+          <img id="before-old-pc" src={oldpc} alt="old-pc"/>
+          <div id="white-screen"></div>
+          <div id="before-caution">ブラウザを縦に広げてください</div>
         </div>
-        <img id="old-pc" src={oldpc} alt="old-pc" />
-        <div id="white-screen"></div>
+        <div id="afterClick">
+          <div className="container">
+            <div className="main-content" style={{ backgroundImage: `url(${this.imageSet.bgImage})` }}>
+              <div id="topline-img"><img src={this.imageSet.topLineImg} /></div>
+              <img src={menu} alt="menu" id="menuImg" />
+              <div width="230" className="selectMenu">
+                <a href="#" onClick={() => this.changeDisplayRef.current.handleProfileImgClick()}>
+                  <img id="profileImg" className="menuButton" src={profile} alt="profileImg" />
+                </a>
+                <a href="#" onClick={() => this.changeDisplayRef.current.handleWorksImgClick()}>
+                  <img id="worksImg" className="menuButton" src={works} alt="worksImg" />
+                </a>
+                <a href="#" onClick={() => this.changeDisplayRef.current.handleLinkImgClick()}>
+                  <img id="linkImg" className="menuButton" src={link} alt="linkImg" />
+                </a>
+              </div>
+              <ChangeDisplay ref={this.changeDisplayRef} mainImg={this.imageSet.mainImg} />
+              <img id="bottomline-img" src={this.imageSet.bottomLineImg} alt="bottomLine-img" />
+            </div>
+          </div>
+          <img id="after-old-pc" src={oldpc} alt="old-pc" />
+          <div id="after-caution" className="hidden">ブラウザを縦に広げてください</div>
+        </div>
       </div>
     );
   }

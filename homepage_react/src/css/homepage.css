@@ -18,7 +18,17 @@ body {
   align-items: center;
   flex-direction: column;
   overflow-y: scroll;
-  animation: afterimage 2s;
+}
+
+#pointer-zone {
+  position: absolute;
+  top: 34%;
+  left: 51%;
+  transform: translate(-50%, -50%) scale(0.35);
+  width: 1123px;
+  height: 877px;
+  z-index:9;
+  cursor:pointer;
 }
 
 .container table {
@@ -57,10 +67,12 @@ body {
 }
 
 .container>div.main-content {
+  overflow-x: hidden;
   padding-inline: 10%;
   position: absolute;
   top: -7%;
   display: flex;
+  width: 1000px;
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -101,14 +113,14 @@ body {
 
 }
 
-#old-pc {
+#before-old-pc,
+#after-old-pc {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   height: 100%;
-  pointer-events: none;
-  animation: afterimage 2s;
+  pointer-Events:none;
 }
 
 #white-screen {
@@ -119,8 +131,50 @@ body {
   height: 100%;
   background-color: white;
   opacity: 1;
+  animation: fadeOut 3s forwards;
   pointer-events: none;
-  animation: fadeOut 5s forwards;
+  z-index: 11;
+}
+
+#before-caution,
+#after-caution {
+  position: fixed;
+  display: flex;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  font-weight: bold;
+  font-size: 500%;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  pointer-events: none;
+  z-index: 10;
+  transition: opacity 0.3s ease;
+}
+
+#beforeClick {
+  opacity: 1;
+  transition: opacity 1s ease;
+}
+
+#afterClick {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+
+#before-caution.hidden,
+#after-caution.hidden {
+  opacity: 0;
+}
+
+#before-caution.visible,
+#after-caution.visible {
+  opacity: 1;
 }
 
 @keyframes fadeOut {
@@ -134,21 +188,5 @@ body {
 
   100% {
     opacity: 0;
-  }
-}
-
-@keyframes afterimage {
-  0% {
-    opacity: 1;
-  }
-
-  50% {
-
-    opacity: 0;
-  }
-
-  100% {
-
-    opacity: 1;
   }
 }

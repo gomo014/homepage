@@ -76,7 +76,7 @@ class ChangeDisplay extends React.Component {
         {this.state.isLinkVisible && (
           <div id="link">
             <img id="koujichu" src={koujichu} alt="koujichu" />
-            <img id="koujichu2" src={koujichu2} alt="koujichu2" />
+            <img id="koujichu" src={koujichu} alt="koujichu" />
             <img id="koujichu" src={koujichu} alt="koujichu" />
           </div>
         )}
