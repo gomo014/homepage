@@ -87,15 +87,13 @@ class SearchResult extends React.Component {
     };
 
     setButtonPositionGrid() {
-        document.getElementById('filters').style.left = '70px';
-        document.getElementById('gridbutton').style.right = '-644px';
-        document.getElementById('detailbutton').style.right = '-655px';
+        document.getElementById('gridbutton').style.right = '-727px';
+        document.getElementById('detailbutton').style.right = '-740px';
     }
 
     setButtonPositionDetail() {
-        document.getElementById('filters').style.left = '-40px';
-        document.getElementById('gridbutton').style.right = '-750px';
-        document.getElementById('detailbutton').style.right = '-761px';
+        document.getElementById('gridbutton').style.right = '-741px';
+        document.getElementById('detailbutton').style.right = '-753px';
     }
 
     //ソートウィンドウのチェックボックス制御
@@ -232,8 +230,8 @@ class SearchResult extends React.Component {
                             <div id="title">タイトル：{this.state.screenData.title}</div><br />
                             <div id="description">{this.state.screenData.description}</div><br />
                             <div id="language">{this.state.screenData.language}</div><br />
-                            <a href={this.state.screenData.url} id="content-link">作品ページにとぶ</a><br />
-                            <a href={this.state.screenData.gitUrl} id="github-link">GitHub</a><br />
+                            <a href={this.state.screenData.url} id="content-link" target="_blank">作品ページにとぶ</a><br />
+                            <a href={this.state.screenData.gitUrl} id="github-link" target="_blank">GitHub</a><br />
                         </div>
                     </div>
                 )}

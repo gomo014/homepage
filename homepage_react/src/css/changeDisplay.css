@@ -5,8 +5,7 @@
 
 #me {
     position: relative;
-    width: 130px;
-    height: 130px;
+    width: 181px;
     top: 1rem;
 }
 
@@ -19,10 +18,12 @@
 #profile-content {
     position: relative;
     display: flex;
+    top: 1rem;
     left: 4rem;
     justify-content: center;
     flex-direction: column;
     background-color: rgba(255, 255, 255, 0.6);
+    font-size: 20px;
 }
 
 .profile-element {
@@ -43,9 +44,8 @@
 
 #link img {
     position: relative;
-    width: 10%;
+    width: 12%;
     left: 34%;
-    margin: 1%;
 }
 
 #iruka-img {
