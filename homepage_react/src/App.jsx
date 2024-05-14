@@ -36,41 +36,46 @@ window.addEventListener('resize', function () {
 
 function resizeContainer() {
   const whRatio = window.innerWidth / window.innerHeight;
-  const diff = whRatio - 2.1;
-  const adjustedValue = (-50.1 - (diff * 1.5)) + '%';
+  //ブラウザ縦横比に合わせて、PCの画面の横位置を設定
+  //adjustedValue : 横軸調整位置
+  let adjustedValue = (whRatio < 1.81 ? -50 + whRatio * 0.6 : -50 - whRatio * 0.02) + '%';
   let AdjustScale = window.innerHeight * 0.0004;
   const container = document.querySelector('#beforeClick .container');
   const pointerZone = document.querySelector('#beforeClick #pointer-zone');
   container.style.transform = `translate(${adjustedValue}, -50%) scale(${AdjustScale})`;
   pointerZone.style.transform = `translate(${adjustedValue}, -50%) scale(${AdjustScale})`;
 
+  //ブラウザ縦横比警告
   var caution = document.getElementById('before-caution');
-
-  if (whRatio > 2.18) {
-    caution.classList.add('visible');
-    caution.classList.remove('hidden');
-  } else {
-    caution.classList.add('hidden');
-    caution.classList.remove('visible');
-  }
+  caution.classList.toggle('visible', whRatio > 5);
+  caution.classList.toggle('hidden', !(whRatio > 5));
 };
 
 function resizeContainerAfterChanged() {
   const whRatio = window.innerWidth / window.innerHeight;
-  const diff = whRatio - 2.1;
-  const adjustedValue = (-50.1 - (diff * 1.5)) + '%';
+  //ブラウザ縦横比に合わせて、PCの画面の横位置を設定
+  //adjustedValue : 横軸調整位置
+  let adjustedValue = (-50 + (
+    whRatio < 1.2 ? whRatio * 0.7 :
+    whRatio < 1.4 ? whRatio * 0.6 :
+    whRatio < 1.5 ? whRatio * 0.4 :
+    whRatio < 1.6 ? whRatio * 0.25 :
+    whRatio < 1.7 ? whRatio * 0.2 :
+    whRatio < 1.8 ? whRatio * 0.15 :
+    whRatio < 1.9 ? whRatio * 0.05 :
+    whRatio < 2 ? -whRatio * 0.02 :
+    whRatio < 2.1 ? -whRatio * 0.04 :
+    whRatio < 2.3 ? -whRatio * 0.18 :
+    whRatio < 3 ? -whRatio * 0.25 : -whRatio * 0.3)) + '%';
+  
   let AdjustScale = window.innerHeight * 0.00078;
   const container = document.querySelector('#afterClick .container');
   container.style.transform = `translate(${adjustedValue}, -50%) scale(${AdjustScale})`;
-  var caution = document.getElementById('after-caution');
 
-  if (whRatio > 2.18) {
-    caution.classList.add('visible');
-    caution.classList.remove('hidden');
-  } else {
-    caution.classList.add('hidden');
-    caution.classList.remove('visible');
-  }
+  //ブラウザ縦横比警告
+  var caution = document.getElementById('after-caution');
+  caution.classList.toggle('visible', whRatio > 3.3);
+  caution.classList.toggle('hidden', !(whRatio > 3.3));
 };
 
 
