@@ -6,7 +6,6 @@ import filterIcon from '../../public/images/filterIcon.png';
 import gridDisplay from '../../public/images/gridDisplay.png';
 import detailDisplay from '../../public/images/detailDisplay.png';
 import backArrow from '../../public/images/t_arrowb.gif';
-import close from '../../public/images/close.png';
 import axios from 'axios';
 
 class SearchResult extends React.Component {
