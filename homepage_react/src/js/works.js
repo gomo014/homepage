@@ -1,9 +1,12 @@
 import React from 'react';
 import '../css/works.css';
+import '../js/lightbox.js';
+import '../css/lightbox.css';
 import filterIcon from '../../public/images/filterIcon.png';
 import gridDisplay from '../../public/images/gridDisplay.png';
 import detailDisplay from '../../public/images/detailDisplay.png';
 import backArrow from '../../public/images/t_arrowb.gif';
+import close from '../../public/images/close.png';
 import axios from 'axios';
 
 class SearchResult extends React.Component {
@@ -18,6 +21,7 @@ class SearchResult extends React.Component {
             isContentScreenFlag: false,
             sortFilterPosition: '61px',
             filtersType: {
+                'Webページ': false,
                 'Webアプリ': false,
                 'Androidアプリ': false,
                 'iPhoneアプリ': false,
@@ -182,7 +186,6 @@ class SearchResult extends React.Component {
                                 </div>
                             )}
                         </div>
-
                         <button id="gridbutton" onClick={() => { this.setState({ isGridFlag: true }); this.setButtonPositionGrid(); }}><img src={gridDisplay} alt="Button Icon" className="button-img" /></button>
                         <button id="detailbutton" onClick={() => { this.setState({ isGridFlag: false }); this.setButtonPositionDetail(); }}><img src={detailDisplay} alt="Button Icon" className="button-img" /></button>
                         {this.state.isGridFlag && (
@@ -190,7 +193,7 @@ class SearchResult extends React.Component {
                                 {filteredKeys.map((key, index) => (
                                     <div className="result-grid" key={index}>
                                         <img className="data-img" src={key.Thumbnail} alt={index} />
-                                        <a href="#" className="black" onClick={() => this.setData(key)}>「{key.Title}」<br />{key.Type}</a>
+                                        <a href="#" className="black" onClick={() => this.setData(key)}>{key.Title}</a>
                                     </div>
                                 ))}
                             </div>
@@ -224,14 +227,18 @@ class SearchResult extends React.Component {
                 )}
                 {this.state.isContentScreenFlag && (
                     <div id="content-screen">
-                        <a href="#" id="screen-back-link" onClick={() => {this.setState({isContentScreenFlag: false})}}><img src={backArrow} alt="back-arrow" id="back-arrow" /> 前に戻る</a>
+                        <a href="#" id="screen-back-link" onClick={() => { this.setState({ isContentScreenFlag: false }) }}><img src={backArrow} alt="back-arrow" id="back-arrow" /> 前に戻る</a>
                         <div id="content">
-                            <img src={this.state.screenData.image} id="content-img"/><br />
-                            <div id="title">タイトル：{this.state.screenData.title}</div><br />
-                            <div id="description">{this.state.screenData.description}</div><br />
-                            <div id="language">{this.state.screenData.language}</div><br />
-                            <a href={this.state.screenData.url} id="content-link" target="_blank">作品ページにとぶ</a><br />
-                            <a href={this.state.screenData.gitUrl} id="github-link" target="_blank">GitHub</a><br />
+                            <a href={this.state.screenData.image} data-lightbox="image-1">
+                                <img src={this.state.screenData.image} id="content-img" />
+                            </a>
+                            <br />
+                            <div id="content-right">
+                                <div id="title">{this.state.screenData.title}</div><br />
+                                <div id="description">{this.state.screenData.description}</div><br />
+                                <a href={this.state.screenData.url} id="content-link" target="_blank">作品ページにとぶ</a><br />
+                                <a href={this.state.screenData.gitUrl} id="github-link" target="_blank">GitHub</a><br />
+                            </div>
                         </div>
                     </div>
                 )}

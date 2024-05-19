@@ -31,7 +31,6 @@ window.addEventListener('resize', function () {
   } else {
     resizeContainerAfterChanged();
   }
-
 });
 
 function resizeContainer() {

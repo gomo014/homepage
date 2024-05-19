@@ -132,15 +132,17 @@ a:visited {
     height: 275px;
     top: 0%;
     left: 0%;
+    image-rendering: optimizeQuality;
 }
 
 .black {
     position: relative;
-    width: 274px;
+    width: 275px;
     height: 275px;
     top: -282px;
     left: 0%;
     opacity: 0;
+    font-size: 21px;
     content: "test";
     transition: 0.2s;
     display: flex;
@@ -222,31 +224,20 @@ li {
 
 #content-screen {
     position: relative;
-    height: 400px;
-    width: 874px;
-    left: 65px;
-    border: solid 1px rgba(255, 255, 255, 0.1);
-    color: white;
-    box-sizing: border-box;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-}
-
-#content-screen:before {
-    content: "";
-    z-index: -1;
-    filter: blur(4px);
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
+    top: 24px;
+    height: 604px;
+    width: 971px;
+    left: 2px;
+    margin-bottom: 28px;
+    font-size: 22px;
+    background-color: rgba(255, 255, 255, 0.6);
 }
 
 #screen-back-link {
     position: relative;
-    left: 36px;
     top: 34px;
     font-weight: bold;
+    left: 23px;
     align-items: center;
 }
 
@@ -259,33 +250,44 @@ li {
 }
 
 #content-img {
-    position:relative;
-    top:100px;
+    width: 480px;
+    position: relative;
+    top: 46px;
+    left: -72px;
 }
 
 #title {
     position: relative;
-    top: -57px;
-    left: 133px;
+    top: 9px;
+    left: 0px;
+    font-size: 28px;
+    font-weight: bold;
 }
 
 #description {
-    position: relative;
-    top: -50px;
-    left: 131px;
+    position: absolute;
+    top: 80px;
+    width: 422px;
 }
 
 #language {
-    position: relative;
-    left: 130px;
+    top: 67px;
+    position: absolute;
+    width: 422px;
 }
 
 #content-link {
-    position: relative;
-    left: 130px;
+    position: absolute;
+    top: 295px;
 }
 
 #github-link {
-    position:relative;
-    left:130px
+    position: absolute;
+    top: 336px;
+}
+
+#content-right {
+    position: relative;
+    top: -331px;
+    right: -450px;
 }
