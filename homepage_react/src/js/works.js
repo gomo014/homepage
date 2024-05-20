@@ -23,13 +23,12 @@ class SearchResult extends React.Component {
                 'Webページ': false,
                 'Webアプリ': false,
                 'Androidアプリ': false,
-                'iPhoneアプリ': false,
-                'API': false,
             },
             filtersLanguage: {
-                'Swift': false,
                 'Python': false,
-                'Javascript': false
+                'Java': false,
+                'Javascript': false,
+                'CSS': false,
             },
             screenData: {
                 image: '',
@@ -142,7 +141,10 @@ class SearchResult extends React.Component {
             const typeFilterPassed = Object.values(this.state.filtersType).every((filter) => !filter) || this.state.filtersType[key.Type];
 
             // 言語フィルターを適用する
-            const languageFilterPassed = Object.values(this.state.filtersLanguage).every((filter) => !filter) || this.state.filtersLanguage[key.Language];
+            const keyLanguages = key.Language.split(',').map(lang => lang.trim());
+
+            const languageFilterPassed = Object.values(this.state.filtersLanguage).every((filter) => !filter) ||
+              keyLanguages.some(language => this.state.filtersLanguage[language]);
 
             // 両方のフィルターがパスしたキーを返す
             return typeFilterPassed && languageFilterPassed;
