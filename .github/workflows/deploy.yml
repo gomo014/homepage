@@ -31,5 +31,5 @@ jobs:
           APPLICATION_NAME: homepage
           ENVIRONMENT_NAME: e-dez7pj2gmp
         run: |
-          eb init $APPLICATION_NAME -p <platform> -r $AWS_REGION
+          eb init $APPLICATION_NAME -p python -r $AWS_REGION
           eb deploy $ENVIRONMENT_NAME --staged
