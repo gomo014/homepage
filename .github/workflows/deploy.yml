@@ -35,8 +35,8 @@ jobs:
       - name: Deploy to Elastic Beanstalk
         env:
           AWS_REGION: ap-northeast-2  # ここにAWSのリージョンを指定する
-          APPLICATION_NAME: homepage  # ここにElastic Beanstalkのアプリケーション名を指定する
-          ENVIRONMENT_NAME: homepage  # ここにElastic Beanstalkの環境名を指定する
+          APPLICATION_NAME: testtest  # ここにElastic Beanstalkのアプリケーション名を指定する
+          ENVIRONMENT_NAME: Testtest-env  # ここにElastic Beanstalkの環境名を指定する
         run: |
           export PATH=$PATH:$HOME/.local/bin
           eb init $APPLICATION_NAME --platform python --region $AWS_REGION
