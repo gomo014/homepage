@@ -18,7 +18,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.10'  # Pythonの互換性のあるバージョンを指定する
+          python-version: '3.11'  # Pythonの互換性のあるバージョンを指定する
 
       - name: Install EB CLI
         run: |
@@ -36,7 +36,7 @@ jobs:
         env:
           AWS_REGION: ap-northeast-2  # ここにAWSのリージョンを指定する
           APPLICATION_NAME: homepage  # ここにElastic Beanstalkのアプリケーション名を指定する
-          ENVIRONMENT_NAME: e-dez7pj2gmp  # ここにElastic Beanstalkの環境名を指定する
+          ENVIRONMENT_NAME: homepage  # ここにElastic Beanstalkの環境名を指定する
         run: |
           export PATH=$PATH:$HOME/.local/bin
           eb init $APPLICATION_NAME --platform python --region $AWS_REGION
