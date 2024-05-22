@@ -3,7 +3,7 @@ name: Deploy to AWS Elastic Beanstalk
 on:
   push:
     branches:
-      - main
+      - main  # デプロイするブランチ名に応じて変更する
 
 jobs:
   deploy:
@@ -16,20 +16,26 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.10'
+          python-version: '3.10'  # Pythonの互換性のあるバージョンを指定する
 
       - name: Install EB CLI
         run: |
           python -m pip install --upgrade pip
           pip install awsebcli --upgrade --user
 
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: AKIAXYKJVSPUTS773HU3
+          aws-secret-access-key: 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
+          aws-region: ap-northeast-2
+
       - name: Deploy to Elastic Beanstalk
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ap-northeast-2
-          APPLICATION_NAME: homepage
-          ENVIRONMENT_NAME: e-dez7pj2gmp
+          AWS_REGION: ap-northeast-2  # ここにAWSのリージョンを指定する
+          APPLICATION_NAME: homepage  # ここにElastic Beanstalkのアプリケーション名を指定する
+          ENVIRONMENT_NAME: e-dez7pj2gmp  # ここにElastic Beanstalkの環境名を指定する
         run: |
-          eb init $APPLICATION_NAME -p python -r $AWS_REGION
+          export PATH=$PATH:$HOME/.local/bin
+          eb init $APPLICATION_NAME -p python -r $AWS_REGION --profile eb-cli
           eb deploy $ENVIRONMENT_NAME --staged
