@@ -29,7 +29,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: AKIAXYKJVSPUTS773HU3
-          aws-secret-access-key: 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
+          aws-secret-access-key: fuck you
           aws-region: ap-northeast-2
 
       - name: Deploy to Elastic Beanstalk
