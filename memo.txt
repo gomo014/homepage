@@ -18,4 +18,4 @@
     ・elastic beansにデプロイ（エラー解析、URL確認）
 TODO: 
 仮想コンテナを使用した開発
-CDCI（Github Actionsでなにをやっているかもう少し調べる）
+CDCI（Github Actionsでなにをやっているかもう少し調べる）あ
