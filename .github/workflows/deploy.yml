@@ -5,7 +5,7 @@ name: Deploy to AWS Elastic Beanstalk
 on:
   push:
     branches:
-      - main  # デプロイするブランチ名に応じて変更する
+      - main
 
 jobs:
   deploy:
@@ -28,15 +28,15 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: AKIAXYKJVSPUTS773HU3
-          aws-secret-access-key: fuck you
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-northeast-2
 
       - name: Deploy to Elastic Beanstalk
         env:
-          AWS_REGION: ap-northeast-2  # ここにAWSのリージョンを指定する
-          APPLICATION_NAME: testtest  # ここにElastic Beanstalkのアプリケーション名を指定する
-          ENVIRONMENT_NAME: Testtest-env  # ここにElastic Beanstalkの環境名を指定する
+          AWS_REGION: ap-northeast-2
+          APPLICATION_NAME: donthackmepls
+          ENVIRONMENT_NAME: Donthackmepls-env
         run: |
           export PATH=$PATH:$HOME/.local/bin
           eb init $APPLICATION_NAME --platform python --region $AWS_REGION
