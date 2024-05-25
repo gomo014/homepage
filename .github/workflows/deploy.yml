@@ -36,7 +36,7 @@ jobs:
         env:
           AWS_REGION: ap-southeast-2
           APPLICATION_NAME: donthackmepls
-          ENVIRONMENT_NAME: Donthackmepls-env-1 
+          ENVIRONMENT_NAME: Donthackmepls-env
         run: |
           export PATH=$PATH:$HOME/.local/bin
           eb init $APPLICATION_NAME --platform python --region $AWS_REGION
