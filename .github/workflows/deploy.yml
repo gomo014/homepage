@@ -18,7 +18,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.11'
+          python-version: '3.8'
 
       - name: Install EB CLI
         run: |
@@ -36,7 +36,7 @@ jobs:
         env:
           AWS_REGION: ap-southeast-2
           APPLICATION_NAME: donthackmepls
-          ENVIRONMENT_NAME: Donthackmepls-env
+          ENVIRONMENT_NAME: Donthackmepls-env-1
         run: |
           export PATH=$PATH:$HOME/.local/bin
           eb init $APPLICATION_NAME --platform python --region $AWS_REGION
