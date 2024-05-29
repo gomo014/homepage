@@ -33,12 +33,6 @@ jobs:
         run: |
           python manage.py collectstatic --noinput
 
-      - name: Deploy static files
-        env:
-          STATIC_ROOT: ${{ github.workspace }}/static
-        run: |
-          aws s3 sync --delete $STATIC_ROOT s3://$EB_BUCKET/static/
-
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
