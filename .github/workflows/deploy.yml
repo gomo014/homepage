@@ -32,6 +32,7 @@ jobs:
       - name: Collect static files
         run: |
           python manage.py collectstatic --noinput
+          find staticfiles/ -type f
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -48,11 +49,4 @@ jobs:
         run: |
           export PATH=$PATH:$HOME/.local/bin
           eb init $APPLICATION_NAME --platform python --region $AWS_REGION
-          eb deploy $ENVIRONMENT_NAME --staged | tee eb_deploy_output.log
-
-      - name: Display Elastic Beanstalk deployment information
-        run: |
-          echo "AWS Elastic Beanstalk deployment information:"
-          cat eb_deploy_output.log
-          echo "Deployed static files location:"
-          cat eb_deploy_output.log | grep '/opt/python/current/app'
+          eb deploy $ENVIRONMENT_NAME --staged
