@@ -54,5 +54,5 @@ jobs:
         run: |
           echo "AWS Elastic Beanstalk deployment information:"
           cat eb_deploy_output.log
-          echo "Deployed URL:"
-          aws elasticbeanstalk describe-environments --environment-names $ENVIRONMENT_NAME --query "Environments[0].CNAME" --output text
+          echo "Deployed static files location:"
+          cat eb_deploy_output.log | grep '/opt/python/current/app'
