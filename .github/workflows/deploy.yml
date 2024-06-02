@@ -52,5 +52,7 @@ jobs:
 
       - name: Display Elastic Beanstalk deployment information
         run: |
-         echo "AWS Elastic Beanstalk deployment information:"
-          cat eb_deploy_output.log | grep -E "Environment update completed successfully.|Deployed version of your-application-name on your-environment-name."
+          echo "AWS Elastic Beanstalk deployment information:"
+          cat eb_deploy_output.log
+          echo "Deployed URL:"
+          aws elasticbeanstalk describe-environments --environment-names $ENVIRONMENT_NAME --query "Environments[0].CNAME" --output text
