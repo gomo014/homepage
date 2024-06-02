@@ -32,6 +32,7 @@ jobs:
       - name: Collect static files
         run: |
           python manage.py collectstatic --noinput
+          find staticfiles/ -type f
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
