@@ -35,12 +35,14 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-southeast-2
-
+  
       - name: Create Elastic Beanstalk Environment
         env:
            APPLICATION_NAME: donthackmepls
            ENVIRONMENT_NAME: NewEnvironment2
         run: |
+          export PATH=$PATH:$HOME/.local/bin
+          eb init $APPLICATION_NAME --platform python --region $AWS_REGION
           eb create $ENVIRONMENT_NAME --cname $ENVIRONMENT_NAME --single
 
       - name: Deploy Application to Elastic Beanstalk
