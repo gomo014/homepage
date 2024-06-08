@@ -112,7 +112,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'homepage', 'app', 'static'),
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+AWS_STORAGE_BUCKET_NAME = 'mybucketsadwefewfrs'
+AWS_S3_CUSTOM_DOMAIN = 'mybucketsadwefewfrs.s3.ap-southeast-2.amazonaws.com'
+STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/staticfiles/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
