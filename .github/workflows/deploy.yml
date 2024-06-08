@@ -39,7 +39,8 @@ jobs:
       - name: Create Elastic Beanstalk Environment
         env:
            APPLICATION_NAME: donthackmepls
-           ENVIRONMENT_NAME: NewEnvironment3
+           ENVIRONMENT_NAME: NewEnvironment4
+           AWS_REGION: ap-southeast-2
         run: |
           export PATH=$PATH:$HOME/.local/bin
           eb init $APPLICATION_NAME --platform python --region $AWS_REGION
@@ -47,6 +48,10 @@ jobs:
 
       - name: Deploy Application to Elastic Beanstalk
         env:
-          ENVIRONMENT_NAME: NewEnvironment3
+          AWS_REGION: ap-southeast-2
+          APPLICATION_NAME: donthackmepls
+          ENVIRONMENT_NAME: NewEnvironment4das
         run: |
-          eb deploy $ENVIRONMENT_NAME
+          export PATH=$PATH:$HOME/.local/bin
+          eb init $APPLICATION_NAME --platform python --region $AWS_REGION
+          eb deploy $ENVIRONMENT_NAME --staged
