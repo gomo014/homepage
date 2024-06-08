@@ -43,6 +43,7 @@ jobs:
           ENVIRONMENT_NAME: Donthackmepls-env
         run: |
           export PATH=$PATH:$HOME/.local/bin
+          eb init $APPLICATION_NAME --platform python --region $AWS_REGION
           eb deploy $ENVIRONMENT_NAME
 
       - name: List files for debugging
