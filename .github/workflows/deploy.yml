@@ -46,7 +46,15 @@ jobs:
           eb init $APPLICATION_NAME --platform python --region $AWS_REGION
           eb deploy $ENVIRONMENT_NAME
 
-      - name: List files for debugging
+      - name: Create Elastic Beanstalk Environment
+        env:
+           APPLICATION_NAME: donthackmepls
+           ENVIRONMENT_NAME: NewEnvironment
         run: |
-          ls -al .ebextensions
-          cat .ebextensions/01_static_files.config
+          eb create $ENVIRONMENT_NAME --cname $ENVIRONMENT_NAME --single
+
+      - name: Deploy Application to Elastic Beanstalk
+        env:
+          ENVIRONMENT_NAME: NewEnvironment
+        run: |
+          eb deploy $ENVIRONMENT_NAME
