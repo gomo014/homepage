@@ -17,7 +17,7 @@ def generate_secret_key(length=50):
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', generate_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
