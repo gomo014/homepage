@@ -21,28 +21,43 @@ import './css/homepage.css';
 
 let clickFlag = false;
 
-//ページがロードされたら非表示にする
+//ページがロードされたらローディング画面を非表示にする
 window.addEventListener('load', function() {
   document.getElementById('loader').style.display = 'none';
 });
 
-document.onreadystatechange = function() {
-  if (document.readyState === 'interactive') {
-    let total = document.getElementsByTagName('*').length;
-    let loaded = 0;
+window.addEventListener('load', function() {
+  let images = document.images;
+  let totalImages = images.length;
+  let loadedImages = 0;
 
-    const interval = setInterval(function() {
-      let currentLoaded = document.getElementsByTagName('*').length - total + loaded;
-      let progress = Math.floor((currentLoaded / total) * 100);
-      document.getElementById('progress').textContent = progress + '%';
-      
-      if (progress >= 100) {
-        clearInterval(interval);
-        document.getElementById('loader').style.display = 'none';
-      }
-    }, 100);
+  function updateProgress() {
+    let percent = Math.floor((loadedImages / totalImages) * 100);
+    document.getElementById('progress').textContent = percent + '%';
+
+    if (percent >= 100) {
+      document.getElementById('loader').style.display = 'none';
+    }
   }
-};
+
+  for (let i = 0; i < totalImages; i++) {
+    // 各画像の読み込み完了時に進捗を更新
+    images[i].onload = function() {
+      loadedImages++;
+      updateProgress();
+    };
+    // エラーが発生してもカウント
+    images[i].onerror = function() {
+      loadedImages++;
+      updateProgress();
+    };
+  }
+
+  // 画像がない場合、即座にロード画面を消す
+  if (totalImages === 0) {
+    document.getElementById('loader').style.display = 'none';
+  }
+});
 
 //ブラウザの初期変更時・サイズ変更時に、ブラウザサイズにあわせたコンテンツのサイズを調整
 document.addEventListener('DOMContentLoaded', function () {
