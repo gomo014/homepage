@@ -21,6 +21,11 @@ import './css/homepage.css';
 
 let clickFlag = false;
 
+//ページがロードされたら非表示にする
+window.addEventListener('load', function() {
+  document.getElementById('loader').style.display = 'none';
+});
+
 //ブラウザの初期変更時・サイズ変更時に、ブラウザサイズにあわせたコンテンツのサイズを調整
 document.addEventListener('DOMContentLoaded', function () {
   resizeContainer();
@@ -154,7 +159,9 @@ class App extends React.Component {
             </div>
           </div>
           <img id="before-old-pc" src={oldpc} alt="old-pc"/>
-          <div id="white-screen"></div>
+          <div id="loader">
+            <div id="progress">0%</div>
+          </div>
         </div>
         <div id="afterClick">
           <div className="container">
