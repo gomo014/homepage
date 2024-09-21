@@ -26,6 +26,24 @@ window.addEventListener('load', function() {
   document.getElementById('loader').style.display = 'none';
 });
 
+document.onreadystatechange = function() {
+  if (document.readyState === 'interactive') {
+    let total = document.getElementsByTagName('*').length;
+    let loaded = 0;
+
+    const interval = setInterval(function() {
+      let currentLoaded = document.getElementsByTagName('*').length - total + loaded;
+      let progress = Math.floor((currentLoaded / total) * 100);
+      document.getElementById('progress').textContent = progress + '%';
+      
+      if (progress >= 100) {
+        clearInterval(interval);
+        document.getElementById('loader').style.display = 'none';
+      }
+    }, 100);
+  }
+};
+
 //ブラウザの初期変更時・サイズ変更時に、ブラウザサイズにあわせたコンテンツのサイズを調整
 document.addEventListener('DOMContentLoaded', function () {
   resizeContainer();
