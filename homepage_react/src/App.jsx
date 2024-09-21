@@ -43,11 +43,6 @@ function resizeContainer() {
   const pointerZone = document.querySelector('#beforeClick #pointer-zone');
   container.style.transform = `translate(${adjustedValue}, -50%) scale(${AdjustScale})`;
   pointerZone.style.transform = `translate(${adjustedValue}, -50%) scale(${AdjustScale})`;
-
-  //ブラウザ縦横比警告
-  var caution = document.getElementById('before-caution');
-  caution.classList.toggle('visible', whRatio > 5);
-  caution.classList.toggle('hidden', !(whRatio > 5));
 };
 
 function resizeContainerAfterChanged() {
@@ -70,13 +65,7 @@ function resizeContainerAfterChanged() {
   let AdjustScale = window.innerHeight * 0.00078;
   const container = document.querySelector('#afterClick .container');
   container.style.transform = `translate(${adjustedValue}, -50%) scale(${AdjustScale})`;
-
-  //ブラウザ縦横比警告
-  var caution = document.getElementById('after-caution');
-  caution.classList.toggle('visible', whRatio > 3.3);
-  caution.classList.toggle('hidden', !(whRatio > 3.3));
 };
-
 
 class App extends React.Component {
   constructor(props) {
@@ -166,7 +155,6 @@ class App extends React.Component {
           </div>
           <img id="before-old-pc" src={oldpc} alt="old-pc"/>
           <div id="white-screen"></div>
-          <div id="before-caution">ブラウザを縦に広げてください</div>
         </div>
         <div id="afterClick">
           <div className="container">
@@ -189,7 +177,6 @@ class App extends React.Component {
             </div>
           </div>
           <img id="after-old-pc" src={oldpc} alt="old-pc" />
-          <div id="after-caution" className="hidden">ブラウザを縦に広げてください</div>
         </div>
       </div>
     );

@@ -166,17 +166,6 @@ body {
   transition: opacity 1s ease;
 }
 
-
-#before-caution.hidden,
-#after-caution.hidden {
-  opacity: 0;
-}
-
-#before-caution.visible,
-#after-caution.visible {
-  opacity: 1;
-}
-
 @keyframes fadeOut {
   0% {
     opacity: 1;
