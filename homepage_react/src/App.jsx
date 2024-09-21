@@ -26,7 +26,7 @@ window.addEventListener('load', function() {
   document.getElementById('loader').style.display = 'none';
 });
 
-window.addEventListener('load', function() {
+document.addEventListener('DOMContentLoaded', function() {
   let images = document.images;
   let totalImages = images.length;
   let loadedImages = 0;
@@ -41,14 +41,13 @@ window.addEventListener('load', function() {
   }
 
   for (let i = 0; i < totalImages; i++) {
-    // 各画像の読み込み完了時に進捗を更新
+    // 各画像の読み込み開始から％を計測する
     images[i].onload = function() {
       loadedImages++;
       updateProgress();
     };
-    // エラーが発生してもカウント
     images[i].onerror = function() {
-      loadedImages++;
+      loadedImages++;  // 読み込み失敗でも進捗を進める
       updateProgress();
     };
   }
