@@ -39,7 +39,20 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.(ttf|otf|eot|woff|woff2)$/, // フォントファイルの拡張子を追加
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]', // ファイル名をそのまま保持
+              outputPath: './fonts/', // フォントを出力するパス
+              publicPath: './static/fonts/', // 公開される際のパス
+            },
+          },
+        ],
+      },
     ],
   },
-  watch: true
+  watch: true,
 };

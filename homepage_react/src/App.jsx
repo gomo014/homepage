@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import menu from '../public/images/menu.gif';
 import ChangeDisplay from './js/changeDisplay.js';
 import profile from '../public/images/profile.png';
@@ -18,14 +18,11 @@ import ojiBottomLine from '../public/images/ojiBottomLine.gif';
 import ojiBg from '../public/images/ojiBg.png';
 import oldpc from '../public/images/old-pc.png';
 import './css/homepage.css';
+import './css/startingUp.css';
 
 let clickFlag = false;
 
-//ページがロードされたらローディング画面を非表示にする
-window.addEventListener('load', function() {
-  document.getElementById('loader').style.display = 'none';
-});
-
+//ローディング画面処理
 document.addEventListener('DOMContentLoaded', function() {
   let images = document.images;
   let totalImages = images.length;
@@ -33,10 +30,35 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function updateProgress() {
     let percent = Math.floor((loadedImages / totalImages) * 100);
-    document.getElementById('progress').textContent = percent + '%';
 
     if (percent >= 100) {
-      document.getElementById('loader').style.display = 'none';
+      const loader = document.getElementById('loader');
+      loader.classList.add('fade-out');
+    
+      setTimeout(function() {
+        loader.style.display = 'none';
+      }, 2000);
+    }
+
+    switch (true) {
+      case (percent <= 10):
+          document.querySelector('.dashed-progress-fill').style.width = '0%';
+          break;
+      case (percent <= 30):
+          document.querySelector('.dashed-progress-fill').style.width = '26%';
+          break;
+      case (percent <= 50):
+          document.querySelector('.dashed-progress-fill').style.width = '46%';
+            break;
+      case (percent <= 75):
+          document.querySelector('.dashed-progress-fill').style.width = '73%';
+            break;
+      case (percent <= 100):
+          document.querySelector('.dashed-progress-fill').style.width = '100%';
+            break;
+      default:
+          document.querySelector('.dashed-progress-fill').style.width = percent + '%';
+          break;
     }
   }
 
@@ -50,11 +72,11 @@ document.addEventListener('DOMContentLoaded', function() {
       loadedImages++;  // 読み込み失敗でも進捗を進める
       updateProgress();
     };
-  }
 
-  // 画像がない場合、即座にロード画面を消す
-  if (totalImages === 0) {
-    document.getElementById('loader').style.display = 'none';
+    // キャッシュされている場合でも`onload`を発火
+    if (images[i].complete) {
+      images[i].onload();
+    }
   }
 });
 
@@ -173,6 +195,7 @@ class App extends React.Component {
 
   render() {
     this.setImages();
+
     return (
       <div>
         <div id="beforeClick">
@@ -192,7 +215,13 @@ class App extends React.Component {
           </div>
           <img id="before-old-pc" src={oldpc} alt="old-pc"/>
           <div id="loader">
-            <div id="progress">0%</div>
+            <div className="startingUp">
+              <div id="S"></div><div id="t"></div><div id="a"></div><div id="r"></div><div id="t2"></div><div id="i"></div><div id="n"></div><div id="g"></div>
+              <div id="u"></div><div id="p"></div><div id="dot"></div>
+            </div>
+            <div className="dashed-progress-bar">
+              <div className="dashed-progress-fill"></div>
+            </div>
           </div>
         </div>
         <div id="afterClick">
