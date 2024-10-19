@@ -19,6 +19,7 @@ import ojiBg from '../public/images/ojiBg.png';
 import oldpc from '../public/images/old-pc.png';
 import './css/homepage.css';
 import './css/startingUp.css';
+//import './css/crt.css';
 
 let clickFlag = false;
 

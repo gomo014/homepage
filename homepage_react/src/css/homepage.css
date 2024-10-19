@@ -63,6 +63,7 @@ html {
 }
 
 .container>div.main-content {
+  position:relative;
   overflow-x: hidden;
   padding-inline: 10%;
   position: absolute;
